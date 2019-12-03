@@ -1,8 +1,14 @@
 .transaction{
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  font-size: 25px;
+  grid-template-columns: repeat(4,1fr);
   justify-items: center;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 3px #B2967D;
 }
+
 
 #transactions{
   grid-area: trans;
@@ -10,36 +16,49 @@
   align-self: center;
   justify-self: center;
   margin: 30px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 7px 7px 5px #B2967D;
 }
 
 #main-container{
+  background-color: #EEE4E1;
   display: grid;
-  grid-template-areas: "total"
-                       "oper"
-                       "trans";
-
-  grid-template-rows: repeat(2, 1fr) 10fr;
+  grid-template-areas:"links" 
+                      "oper"
+                       "trans"
+                       "total";
+  grid-template-rows: repeat(2, 1fr) 10fr 1fr;
   height: 100vh;
 }
 
 #sum{
   grid-area: total;
   display: grid;
-  justify-self: flex-start;
-  align-self: flex-start;
+  justify-self: center;
+  align-self: center;
   padding: 10px;
+  font-family: 'Calistoga', cursive;
+  font-size: 40px;
 }
 
 button{
   margin: 4px;
   padding: 3px;
   border-radius: 3px;
+  font-size: 17px;
+  font-family: 'Calistoga', cursive;
+  color: white;
+  padding: 5px;
 }
 
-#new-transaction-details{
+#new-expense{
   grid-area: oper;
   display: grid;
-  grid-template-columns: 6fr 2fr;
+  grid-template-columns: 8fr 2fr;
+  grid-template-rows: repeat(2,1fr);
+  align-items: center;
 }
 
 #buttons{
@@ -47,16 +66,25 @@ button{
   grid-template-columns: repeat(2,1fr);
   height: fit-content;
   width: fit-content;
+  justify-self: center;
+
 }
+
 
 #inputs{
   display: grid;
   grid-template-columns: repeat(3,1fr);
+
 }
 
 input{
   height: fit-content;
   margin: 5px;
+  padding: 3px;
+  border-radius: 4px;
+  color: #B2967D;
+  font-family: 'Calistoga', cursive;
+  font-size: 17px;
 }
 
 #withdraw{
@@ -65,4 +93,104 @@ input{
 
 #deposit{
   background-color: green;
+}
+
+.delete{
+  display: grid;
+  justify-self: center;
+  font-size: 20px;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.data{
+  margin: 10px;
+  display: grid;
+  justify-self: center;
+}
+
+a{
+  text-decoration: none;
+  color: #A9700F;
+}
+
+#links-container{
+  grid-area: links;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  font-size: 25px;
+  justify-items: center;
+  margin: 10px;
+}
+
+a:visited{
+text-decoration: none;
+color: #A9700F;
+}
+
+.link{
+  background-color: #E7D8C9 ;
+  height: fit-content;
+  padding: 5px;
+  border-radius: 7px;
+  box-shadow: 5px 5px 5px #B2967D;
+  color: #B2967D;
+  font-family: 'Lobster', cursive;
+}
+
+.link:hover {
+  background-color: #E7D8C9;
+}
+
+.deposit, .positive{
+  background-color: green;
+}
+
+.withdraw, .negative{
+  background-color: red;
+}
+
+.group{
+  display: grid;
+  min-width: 0;
+  grid-template-columns: repeat(2,1fr);
+  align-items: center;
+  justify-items: center;
+  height: fit-content;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 3px #B2967D;
+}
+
+#breakdown{
+  grid-area: trans;
+  grid-template-columns: repeat(2, 1fr);
+  justify-self: center;
+  align-self: center;
+  justify-self: center;
+  font-size: 25px;
+  margin: 5px;
+  box-shadow: 5px 5px 3px #B2967D;
+  height: fit-content;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  width: 50%;
+}
+
+.title{
+  display: grid;
+  justify-items: center;
+  color: #A9700F;
+  padding: 10px;
+  font-family: 'Lobster', cursive;
+}
+ 
+#date{
+  display: grid;
+  justify-self: center;
 }
