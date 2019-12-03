@@ -12,7 +12,7 @@ function DatePickerDialog(props) {
     
     useEffect(() => {
         props.updateDate(selectedDate)
-    })
+    },[selectedDate])
 
 
   return (

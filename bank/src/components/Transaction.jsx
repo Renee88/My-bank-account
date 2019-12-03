@@ -7,7 +7,6 @@ class Transaction extends Component {
 
     render() {
         let transaction = this.props.singleTransData
-        console.log(transaction)
         return (
              <div className={transaction.amount > 0 ? "transaction deposit": "transaction withdraw"} > 
                 <div className = "amount data">{transaction.amount}</div>

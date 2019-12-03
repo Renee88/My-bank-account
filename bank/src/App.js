@@ -66,28 +66,26 @@ class App extends Component {
   }
 
 
-  async updateTransections() {
-    return axios.get('http://localhost:1309/transactions')
+  async updateTransactions() {
+    return await axios.get('http://localhost:1309/transactions')
   }
 
   breakdown = async () => {
     let groupedTransactions = await axios.get('http://localhost:1309/breakdown')
-    this.setState({ balance: groupedTransactions.data }, function () {
-      console.log(this.state.balance)
-    })
+    this.setState({ balance: groupedTransactions.data })
   }
 
-  async componentDidMount() {
-    let transactions = await this.updateTransections()
-    this.setState({ transactions: transactions.data })
-  }
-
+  
   updateDate = (date)=>{
     const newTransaction = this.state.newTransaction
     newTransaction['date'] = date
     this.setState({ newTransaction })
   }
-
+  
+  async componentDidMount() {
+    let transactions = await this.updateTransactions()
+    this.setState({ transactions: transactions.data })
+  }
 
   render() {
 
@@ -103,7 +101,7 @@ class App extends Component {
           <div id="sum">Total: {this.balance()}</div>
           <Route exact path='/transactions' render={() => <Transactions transData={this.state.transactions} removeTransaction={this.removeTransaction} />} />
           <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit} 
-          updateNewTransaction={this.updateNewTransection} updateDate = {this.updateDate}
+          updateNewTransaction={this.updateNewTransaction} updateDate = {this.updateDate}
             amount={this.state.newTransaction.amount} vendor={this.state.newTransaction.vendor} category={this.state.newTransaction.category} />} />
           <Route exact path='/breakdown' render={() => <Breakdown balance={this.state.balance} />} />
         </div>

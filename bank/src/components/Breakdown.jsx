@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 class Breakdown extends Component {
+    
     render() {
         return (
             <div id = "breakdown" >

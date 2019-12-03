@@ -11,7 +11,7 @@ class Operations extends Component {
         this.props.deposit(this.props.amount, this.props.vendor, this.props.category)
     }
 
-    updateNewTransection = (e) =>{
+    updateNewTransaction = (e) =>{
         this.props.updateNewTransaction(e)
     }
 
