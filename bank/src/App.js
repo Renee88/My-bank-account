@@ -6,19 +6,14 @@ import Operations from './components/Operations';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import axios from 'axios'
 import Breakdown from './components/Breakdown';
-import DatePickerDialog from './components/DatePickerDialog';
+import moment from 'moment'
 
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      transactions: [
-        { amount: 3200, vendor: "Elevation", category: "Salary" },
-        { amount: -7, vendor: "Runescape", category: "Entertainment" },
-        { amount: -20, vendor: "Subway", category: "Food" },
-        { amount: -98, vendor: "La Baguetterie", category: "Food" }
-      ],
+      transactions: [],
 
       newTransaction: {
         amount: "",
@@ -26,7 +21,8 @@ class App extends Component {
         category: "",
         date: ""
       },
-      balance: []
+      balance: [],
+      updated: false
 
     }
   }
@@ -37,20 +33,27 @@ class App extends Component {
     return balance
   }
 
-  withdraw = async (amount, vendor, category) => {
-    let transaction = { amount: -parseInt(amount), vendor: vendor, category: category }
+  withdraw = async (amount, vendor, category, date) => {
+    let transaction = { amount: -parseInt(amount), vendor: vendor, category: category, date: date }
     let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
-    this.setState({ transactions: transactions.data })
-
+    let newTransations = transactions.data.map(t=> t.date = moment(t.date).format("MMM Do YY"))
+    let updated = this.state.updated
+    transactions.data ? updated = true : updated = false
+    this.setState({ transactions: newTransations, updated: updated })
   }
 
-  deposit = async (amount, vendor, category) => {
-    let transaction = { amount: parseInt(amount), vendor: vendor, category: category }
+  deposit = async (amount, vendor, category, date) => {
+    let transaction = { amount: parseInt(amount), vendor: vendor, category: category, date: date }
+    console.log(transaction)
     let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
-    this.setState({ transactions: transactions.data })
+    let newTransations = transactions.data.map(t=> t.date = moment(t.date).format("MMM Do YY"))
+    console.log(newTransations)
+    let updated = this.state.updated
+    transactions.data ? updated = true : updated = false
+    this.setState({ transactions: newTransations, updated: updated })
   }
 
-  updateNewTransection = (e) => {
+  updateNewTransaction = (e) => {
     let value = e.target.value
     let name = e.target.name
     let newTransaction = this.state.newTransaction
@@ -75,13 +78,13 @@ class App extends Component {
     this.setState({ balance: groupedTransactions.data })
   }
 
-  
-  updateDate = (date)=>{
+
+  updateDate = (date) => {
     const newTransaction = this.state.newTransaction
     newTransaction['date'] = date
     this.setState({ newTransaction })
   }
-  
+
   async componentDidMount() {
     let transactions = await this.updateTransactions()
     this.setState({ transactions: transactions.data })
@@ -101,8 +104,8 @@ class App extends Component {
           <div id="sum">Total: {this.balance()}</div>
           <Route exact path='/transactions' render={() => <Transactions transData={this.state.transactions} removeTransaction={this.removeTransaction} />} />
           <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit} 
-          updateNewTransaction={this.updateNewTransaction} updateDate = {this.updateDate}
-            amount={this.state.newTransaction.amount} vendor={this.state.newTransaction.vendor} category={this.state.newTransaction.category} />} />
+            updateNewTransaction = {this.updateNewTransaction} updateDate={this.updateDate}
+            newTransaction = {this.state.newTransaction} didUpdate={this.state.updated} />} />
           <Route exact path='/breakdown' render={() => <Breakdown balance={this.state.balance} />} />
         </div>
       </Router>
