@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import axios from 'axios'
 import Breakdown from './components/Breakdown';
 import moment from 'moment'
+import MonthlyBreakdown from './components/MonthlyBreakdown'
+import Home from './components/Home';
 
 
 class App extends Component {
@@ -22,8 +24,8 @@ class App extends Component {
         date: ""
       },
       balance: [],
-      updated: false
-
+      updated: false,
+      monthlyBalance: []
     }
   }
 
@@ -39,6 +41,7 @@ class App extends Component {
     debugger
     transactions = transactions.data.map(t => {
       return {
+        _id: t._id,
         amount: t.amount,
         vendor: t.vendor,
         category: t.category,
@@ -46,7 +49,7 @@ class App extends Component {
       }
     })
     let updated = this.state.updated
-    transactions.data ? updated = true : updated = false
+    transactions.length ? updated = true : updated = false
     this.setState({ transactions: transactions, updated: updated })
   }
 
@@ -55,6 +58,7 @@ class App extends Component {
     let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
     transactions = transactions.data.map(t => {
       return {
+        _id: t._id,
         amount: t.amount,
         vendor: t.vendor,
         category: t.category,
@@ -62,7 +66,7 @@ class App extends Component {
       }
     })
     let updated = this.state.updated
-    transactions.data ? updated = true : updated = false
+    transactions.length ? updated = true : updated = false
     this.setState({ transactions: transactions, updated: updated })
   }
 
@@ -78,7 +82,16 @@ class App extends Component {
 
   removeTransaction = async (id) => {
     let transactions = await axios.delete('http://localhost:1309/transactions', { data: { id: id } })
-    this.setState({ transactions: transactions.data })
+    transactions = transactions.data.map(t => {
+      return {
+        _id: t._id,
+        amount: t.amount,
+        vendor: t.vendor,
+        category: t.category,
+        date: moment(t.date).format("MMM Do YY")
+      }
+    })
+    this.setState({ transactions: transactions })
   }
 
 
@@ -98,6 +111,13 @@ class App extends Component {
     this.setState({ newTransaction })
   }
 
+  groupByMonth = async(month) =>{
+    let transactions = [...this.state.transactions]
+    console.log(transactions)
+    let monthlyBalance = transactions.filter(t=> t.date.includes(month))
+    this.setState({monthlyBalance: monthlyBalance})
+  }
+
   async componentDidMount() {
     let transactions = await this.updateTransactions()
     this.setState({ transactions: transactions.data })
@@ -110,16 +130,18 @@ class App extends Component {
 
         <div id="main-container">
           <div id="links-container">
-            <div id="show-transactions" className="link"><Link to='/transactions' >Watch Transactions</Link></div>
-            <div id="operations link" className="link"><Link to='/operations'>Add Expenses</Link></div>
-            <div id="breakdown link" className="link" ><Link to='/breakdown' onClick={this.breakdown}>Expenses Breakdown</Link></div>
+            <div id="show-transactions-link" className="link"><Link to='/transactions' >Watch Transactions</Link></div>
+            <div id="operations-link" className="link"><Link to='/operations'>Add Expenses</Link></div>
+            <div id="breakdown-link" className="link" ><Link to='/breakdown' onClick={this.breakdown}>Expenses Breakdown</Link></div>
           </div>
+          <Home />
           <div id="sum">Total: {this.balance()}</div>
           <Route exact path='/transactions' render={() => <Transactions transData={this.state.transactions} removeTransaction={this.removeTransaction} />} />
           <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit}
             updateNewTransaction={this.updateNewTransaction} updateDate={this.updateDate}
             newTransaction={this.state.newTransaction} didUpdate={this.state.updated} />} />
-          <Route exact path='/breakdown' render={() => <Breakdown balance={this.state.balance} />} />
+          <Route exact path='/breakdown' render={(match) => <Breakdown groupByMonth = {this.groupByMonth} balance={this.state.balance} />} />
+          <Route exact path = '/breakdown/:month' render = {({match}) =><MonthlyBreakdown monthlyBalance = {this.state.monthlyBalance} groupByMonth = {this.groupByMonth} match = {match} balance={this.state.balance} />} />
         </div>
       </Router>
       : null)

@@ -171,7 +171,6 @@ color: #A9700F;
   grid-template-columns: repeat(2, 1fr);
   justify-self: center;
   align-self: center;
-  justify-self: center;
   font-size: 25px;
   margin: 5px;
   box-shadow: 5px 5px 3px #B2967D;
@@ -193,4 +192,48 @@ color: #A9700F;
 #date{
   display: grid;
   justify-self: center;
+}
+
+#drop-down-menu{
+  display: inline-block;
+  justify-self: center;
+  grid-template-rows: 1fr 12fr;
+}
+
+.months{
+  display: none;
+  position: absolute;
+  overflow: auto;
+  z-index: 1;
+  background-color: white;
+  width: 12%;
+  text-align: center;
+  border-radius: 10px;
+
+}
+
+#drop-down-menu:hover .months{
+  display: block;
+}
+
+#monthly-breakdown{
+  display: grid;
+  grid-template-columns: 1fr;
+  height: fit-content;
+}
+
+.month-name{
+  display: grid;
+  margin: 5px;
+  width: 25%;
+  justify-self: center;
+  justify-content: center;
+  font-size: 25px;
+  box-shadow: 5px 5px 3px #B2967D;
+  height: fit-content;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  color: #A9700F;
+  font-family: 'Lobster', cursive;
 }
