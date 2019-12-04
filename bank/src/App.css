@@ -6,7 +6,10 @@
   padding: 5px;
   margin: 5px;
   border-radius: 5px;
+  color: white;
   box-shadow: 5px 5px 3px #B2967D;
+  font-family: 'Caveat', cursive;
+
 }
 
 
@@ -25,7 +28,7 @@
 #main-container{
   background-color: #EEE4E1;
   display: grid;
-  grid-template-areas:"links" 
+  grid-template-areas:"nav" 
                       "oper"
                        "trans"
                        "total";
@@ -74,6 +77,8 @@
 #inputs{
   display: grid;
   grid-template-columns: repeat(3,1fr);
+  width: fit-content;
+  justify-self: center;
 
 }
 
@@ -118,7 +123,6 @@ a{
 }
 
 #links-container{
-  grid-area: links;
   display: grid;
   grid-template-columns: repeat(3,1fr);
   font-size: 25px;
@@ -167,18 +171,15 @@ color: #A9700F;
 }
 
 #breakdown{
-  grid-area: trans;
-  grid-template-columns: repeat(2, 1fr);
-  justify-self: center;
-  align-self: center;
-  font-size: 25px;
-  margin: 5px;
-  box-shadow: 5px 5px 3px #B2967D;
-  height: fit-content;
-  background-color: white;
-  padding: 10px;
-  border-radius: 5px;
-  width: 50%;
+    margin: 20px;
+    font-size: 25px;
+    box-shadow: 5px 5px 3px #B2967D;
+    height: fit-content;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 50%;
+
 }
 
 .title{
@@ -186,6 +187,7 @@ color: #A9700F;
   justify-items: center;
   color: #A9700F;
   padding: 10px;
+  background-color: white;
   font-family: 'Lobster', cursive;
 }
  
@@ -196,7 +198,6 @@ color: #A9700F;
 
 #drop-down-menu{
   display: inline-block;
-  justify-self: center;
   grid-template-rows: 1fr 12fr;
 }
 
@@ -218,8 +219,13 @@ color: #A9700F;
 
 #monthly-breakdown{
   display: grid;
-  grid-template-columns: 1fr;
+  justify-self: center;
+  width: 40%;
   height: fit-content;
+}
+
+.group:hover .modal{
+  display: block;
 }
 
 .month-name{
@@ -236,4 +242,36 @@ color: #A9700F;
   border-radius: 5px;
   color: #A9700F;
   font-family: 'Lobster', cursive;
+}
+
+#nav{
+  grid-area: nav;
+  display: grid;
+  height: fit-content;
+}
+
+.grouped-trans{
+  color: white;
+  font-size: 25px;
+  font-family: 'Caveat', cursive;
+}
+
+#monthlyBreak-title{
+  font-size: 20px;
+}
+
+#breakdown-container{
+  display: grid;
+  justify-items: center;
+}
+
+.modal{
+  display: none;
+  position: absolute;
+  overflow: auto;
+  z-index: 1;
+  background-color: white;
+  text-align: center;
+  color: black;
+  border-radius: 10px;
 }

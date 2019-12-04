@@ -1,17 +1,20 @@
-import React, { Component } from 'react';
-import moment from 'moment'
+import React, { Component } from 'react'
+import MonthlyBreakdown from './MonthlyBreakdown'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 class Home extends Component {
-    
+
+
     render() {
-        let months = moment.monthsShort()
+        
         return (
-            <div id="drop-down-menu">
-                    <div id = "placeholder" className = "link">Select a month</div>
-                <div className="months">
-                    {months.map(m => <Link to={`/breakdown/${m}`} ><div className={m}>{m}</div></ Link>)}
+            <div id="nav">
+                <div id="links-container">
+                    <div id="show-transactions-link" className="link"><Link to='/transactions' >Watch Transactions</Link></div>
+                    <div id="operations-link" className="link"><Link to='/operations'>Add Expenses</Link></div>
+                    <div id="breakdown-link" className="link" ><Link to='/breakdown' onClick={this.props.breakdown}>Expenses Breakdown</Link></div>
                 </div>
+
             </div>
         );
     }

@@ -29,8 +29,9 @@ router.delete('/transactions', function(req,res){
 
 router.get('/breakdown', function(req,res){
     Transaction.aggregate([
-        { $group: { _id: "$category" , amount: { $sum: "$amount" }}}
+        { $group: { _id:'$category', amount: { $sum: "$amount" }}}
     ], function(err,transactions){
+        console.log(transactions)
         res.send(transactions)
     })
 })

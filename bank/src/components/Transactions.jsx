@@ -7,7 +7,7 @@ class Transactions extends Component {
         console.log(this.props.transData)
         return (
             <div id="transactions">
-                <div className = "transaction title"><div>Date</div><div>{'Amount($)'}</div> <div>Vendor</div> <div>Group</div></div>
+                <div className = "transaction title"><div>Date</div><div>Vendor</div> <div>Group</div><div>{'Amount($)'}</div></div>
                 {this.props.transData.map(t => <Transaction key = {t._id}  singleTransData={t} id={t._id} removeTransaction={this.props.removeTransaction} />)}
             </div>
         );
