@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const Transaction = require('../model/Transection')
+const moment = require('moment')
 
 router.post('/transactions', function(req,res){
-    console.log(req.body.transaction)
     const transaction = new Transaction(req.body.transaction)
     transaction.save(function(){
         Transaction.find({},function(err,transactions){

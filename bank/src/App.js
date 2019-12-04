@@ -36,21 +36,34 @@ class App extends Component {
   withdraw = async (amount, vendor, category, date) => {
     let transaction = { amount: -parseInt(amount), vendor: vendor, category: category, date: date }
     let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
-    let newTransations = transactions.data.map(t=> t.date = moment(t.date).format("MMM Do YY"))
+    debugger
+    transactions = transactions.data.map(t => {
+      return {
+        amount: t.amount,
+        vendor: t.vendor,
+        category: t.category,
+        date: moment(t.date).format("MMM Do YY")
+      }
+    })
     let updated = this.state.updated
     transactions.data ? updated = true : updated = false
-    this.setState({ transactions: newTransations, updated: updated })
+    this.setState({ transactions: transactions, updated: updated })
   }
 
   deposit = async (amount, vendor, category, date) => {
     let transaction = { amount: parseInt(amount), vendor: vendor, category: category, date: date }
-    console.log(transaction)
     let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
-    let newTransations = transactions.data.map(t=> t.date = moment(t.date).format("MMM Do YY"))
-    console.log(newTransations)
+    transactions = transactions.data.map(t => {
+      return {
+        amount: t.amount,
+        vendor: t.vendor,
+        category: t.category,
+        date: moment(t.date).format("MMM Do YY")
+      }
+    })
     let updated = this.state.updated
     transactions.data ? updated = true : updated = false
-    this.setState({ transactions: newTransations, updated: updated })
+    this.setState({ transactions: transactions, updated: updated })
   }
 
   updateNewTransaction = (e) => {
@@ -103,9 +116,9 @@ class App extends Component {
           </div>
           <div id="sum">Total: {this.balance()}</div>
           <Route exact path='/transactions' render={() => <Transactions transData={this.state.transactions} removeTransaction={this.removeTransaction} />} />
-          <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit} 
-            updateNewTransaction = {this.updateNewTransaction} updateDate={this.updateDate}
-            newTransaction = {this.state.newTransaction} didUpdate={this.state.updated} />} />
+          <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit}
+            updateNewTransaction={this.updateNewTransaction} updateDate={this.updateDate}
+            newTransaction={this.state.newTransaction} didUpdate={this.state.updated} />} />
           <Route exact path='/breakdown' render={() => <Breakdown balance={this.state.balance} />} />
         </div>
       </Router>
