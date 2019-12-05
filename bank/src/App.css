@@ -119,7 +119,7 @@ input{
 
 a{
   text-decoration: none;
-  color: #A9700F;
+  color: black;
 }
 
 #links-container{
@@ -132,7 +132,7 @@ a{
 
 a:visited{
 text-decoration: none;
-color: #A9700F;
+color: black;
 }
 
 .link{
@@ -141,7 +141,7 @@ color: #A9700F;
   padding: 5px;
   /* border-radius: 7px; */
   /* box-shadow: 5px 5px 5px #B2967D; */
-  color: #B2967D;
+  color: black;
   font-family: 'Lobster', cursive;
 }
 
@@ -207,9 +207,11 @@ color: #A9700F;
   overflow: auto;
   z-index: 1;
   background-color: white;
-  width: 12%;
+  /* color: white; */
+  width: 11%;
+  padding-bottom: 3px;
+  opacity: 0.8;
   text-align: center;
-  border-radius: 10px;
 
 }
 
@@ -235,11 +237,11 @@ color: #A9700F;
   justify-self: center;
   justify-content: center;
   font-size: 25px;
-  box-shadow: 5px 5px 3px #B2967D;
+  /* box-shadow: 5px 5px 3px #B2967D; */
   height: fit-content;
   background-color: white;
   padding: 10px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   color: #A9700F;
   font-family: 'Lobster', cursive;
 }
