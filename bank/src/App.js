@@ -134,8 +134,10 @@ class App extends Component {
     return (this.state.transactions ?
       <Router>
         <div id="main-container">
+          
           <Route path='/' render={() => <Home transactions = {this.state.transactions} groupByMonth = {this.groupByMonth} breakdown = {this.breakdown}/>} />
-          <div id="sum">Total: {this.balance()}</div>
+          <div id="sum">Total: {this.balance()}$</div>
+          
           <Route exact path='/transactions' render={() => <Transactions transData={this.state.transactions} removeTransaction={this.removeTransaction} />} />
           <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit}
             updateNewTransaction={this.updateNewTransaction} updateDate={this.updateDate}
