@@ -9,9 +9,7 @@ body{
   justify-items: center;
   padding: 5px;
   margin: 5px;
-  /* border-radius: 5px; */
   color: white;
-  /* box-shadow: 5px 5px 3px #B2967D; */
   font-family: 'Calistoga', cursive;
 
 }
@@ -25,8 +23,6 @@ body{
   margin: 30px;
   background-color: white;
   padding: 10px;
-  /* border-radius: 5px; */
-  /* box-shadow: 7px 7px 5px #B2967D; */
 }
 
 #main-container{
@@ -54,7 +50,6 @@ body{
 .button{
   margin: 4px;
   padding: 5px;
-  /* border-radius: 5px; */
   font-size: 13px;
   font-family: 'Calistoga', cursive;
   height: fit-content;
@@ -65,32 +60,33 @@ body{
 #new-expense{
   grid-area: oper;
   display: grid;
-  grid-template-columns: 8fr 2fr;
-  grid-template-rows: repeat(2,1fr);
-  align-items: center;
+  background-color: white;
+  width: 30%;
+  justify-self: center;
+  margin-top: 30px;
+
 }
 
 #buttons{
   display: grid;
-  grid-template-columns: 1fr 2fr;
   justify-self: center;
+}
 
+#buttons:hover{
+  cursor: pointer;
 }
 
 
 #inputs{
   display: grid;
-  grid-template-columns: repeat(3,1fr);
-  width: fit-content;
-  justify-self: center;
-
+  justify-items: center;
+  margin: 10px;
 }
 
 input{
   height: fit-content;
-  margin: 5px;
+  margin: 10px;
   padding: 3px;
-  /* border-radius: 4px; */
   color: #B2967D;
   font-family: 'Calistoga', cursive;
   font-size: 17px;
@@ -104,6 +100,7 @@ input{
   background-color: green;
 }
 
+
 .delete{
   display: grid;
   justify-self: center;
@@ -112,7 +109,20 @@ input{
   color: black;
   font-weight: bold;
   padding: 5px;
-  /* border-radius: 5px; */
+}
+
+.delete:hover{
+  cursor: pointer;
+  font-size: 18px;
+  width: fit-content;
+  height: fit-content;
+
+}
+
+.delete:active{
+  font-size: 15px;
+  width: fit-content;
+  height: fit-content;
 }
 
 .data{
@@ -149,6 +159,7 @@ color: black;
 }
 
 .link:hover {
+  cursor: pointer;
   background-color: #E7D8C9;
 }
 
