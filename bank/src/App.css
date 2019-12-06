@@ -1,3 +1,7 @@
+body{
+  margin: 0;
+  width: 100vw;
+}
 .transaction{
   display: grid;
   font-size: 25px;
@@ -8,7 +12,7 @@
   /* border-radius: 5px; */
   color: white;
   /* box-shadow: 5px 5px 3px #B2967D; */
-  font-family: 'Caveat', cursive;
+  font-family: 'Calistoga', cursive;
 
 }
 
@@ -139,8 +143,7 @@ color: black;
   background-color: #E7D8C9 ;
   height: fit-content;
   padding: 5px;
-  /* border-radius: 7px; */
-  /* box-shadow: 5px 5px 5px #B2967D; */
+  box-shadow: 5px 5px 5px #B2967D;
   color: black;
   font-family: 'Lobster', cursive;
 }
@@ -166,18 +169,14 @@ color: black;
   height: fit-content;
   padding: 5px;
   margin: 5px;
-  /* border-radius: 5px; */
-  /* box-shadow: 5px 5px 3px #B2967D; */
 }
 
 #breakdown{
     margin: 20px;
     font-size: 25px;
-    /* box-shadow: 5px 5px 3px #B2967D; */
     height: fit-content;
     background-color: white;
     padding: 10px;
-    /* border-radius: 5px; */
     width: 50%;
 
 }
@@ -207,11 +206,11 @@ color: black;
   overflow: auto;
   z-index: 1;
   background-color: white;
-  /* color: white; */
   width: 11%;
   padding-bottom: 3px;
   opacity: 0.8;
   text-align: center;
+
 
 }
 
@@ -226,9 +225,6 @@ color: black;
   height: fit-content;
 }
 
-.group:hover .modal{
-  display: block;
-}
 
 .month-name{
   display: grid;
@@ -237,11 +233,9 @@ color: black;
   justify-self: center;
   justify-content: center;
   font-size: 25px;
-  /* box-shadow: 5px 5px 3px #B2967D; */
   height: fit-content;
   background-color: white;
   padding: 10px;
-  /* border-radius: 5px; */
   color: #A9700F;
   font-family: 'Lobster', cursive;
 }
@@ -267,19 +261,29 @@ color: black;
   justify-items: center;
 }
 
+.group:hover .modal-container{
+  display: grid;
+  grid-template-columns: 1fr;
+  width:40vw;
+  left:50vw;
+  background-color: white;
+  border-radius: 3px;
+  opacity: 0.8;
+}
+
 .modal{
-  display: none;
-  position: absolute;
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  font-size: 15px;
   overflow: auto;
   z-index: 1;
-  background-color: white;
   text-align: center;
   color: black;
   padding: 4px;
-  /* border-radius: 10px; */
+  font-family: 'Calistoga', cursive;
 }
 
 .modal-container{
-  display: grid;
-  grid-template-columns: 1fr;
+  display: none;
+  position: absolute;
 }

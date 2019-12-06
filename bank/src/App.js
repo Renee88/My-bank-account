@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Transactions from './components/Transactions';
 import Operations from './components/Operations';
@@ -9,7 +8,6 @@ import Breakdown from './components/Breakdown';
 import moment from 'moment'
 import MonthlyBreakdown from './components/MonthlyBreakdown'
 import Home from './components/Home';
-import SelectMonth from './components/SelectMonth';
 
 
 class App extends Component {
@@ -36,10 +34,10 @@ class App extends Component {
     return balance
   }
 
+
   withdraw = async (amount, vendor, category, date) => {
-    let transaction = { amount: -parseInt(amount), vendor: vendor, category: category, date: date }
+    let transaction = { amount: -parseInt(amount), vendor: vendor, category: category.toLowerCase(), date: date }
     let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
-    debugger
     transactions = transactions.data.map(t => {
       return {
         _id: t._id,
@@ -54,8 +52,9 @@ class App extends Component {
     this.setState({ transactions: transactions, updated: updated })
   }
 
+
   deposit = async (amount, vendor, category, date) => {
-    let transaction = { amount: parseInt(amount), vendor: vendor, category: category, date: date }
+    let transaction = { amount: parseInt(amount), vendor: vendor, category: category.toLowerCase(), date: date }
     let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
     transactions = transactions.data.map(t => {
       return {
@@ -100,9 +99,12 @@ class App extends Component {
     return await axios.get('http://localhost:1309/transactions')
   }
 
+  firstToUpperCase = (word) => {
+    return word[0].toUpperCase() + word.slice(1).toLowerCase()
+  }
+
   breakdown = async () => {
     let groupedTransactions = await axios.get('http://localhost:1309/breakdown')
-    console.log(groupedTransactions.data)
     this.setState({ balance: groupedTransactions.data })
   }
 
@@ -134,16 +136,16 @@ class App extends Component {
     return (this.state.transactions ?
       <Router>
         <div id="main-container">
-          
-          <Route path='/' render={() => <Home transactions = {this.state.transactions} groupByMonth = {this.groupByMonth} breakdown = {this.breakdown}/>} />
+
+          <Route path='/' render={() => <Home transactions={this.state.transactions} groupByMonth={this.groupByMonth} breakdown={this.breakdown} />} />
           <div id="sum">Total: {this.balance()}$</div>
-          
-          <Route exact path='/transactions' render={() => <Transactions transData={this.state.transactions} removeTransaction={this.removeTransaction} />} />
+
+          <Route exact path='/transactions' render={() => <Transactions transData={this.state.transactions} removeTransaction={this.removeTransaction} firstToUpperCase = {this.firstToUpperCase} />} />
           <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit}
             updateNewTransaction={this.updateNewTransaction} updateDate={this.updateDate}
             newTransaction={this.state.newTransaction} didUpdate={this.state.updated} />} />
-         <Route path='/breakdown' render={({ match }) => <Breakdown transactions = {this.state.transactions} balance={this.state.balance} match={match} />} />
-         <Route exact path='/breakdown/:month' render={({ match }) => <MonthlyBreakdown transactions={this.state.transactions} match={match} />} />
+          <Route path='/breakdown' render={() => <Breakdown  firstToUpperCase = {this.firstToUpperCase} transactions={this.state.transactions} balance={this.state.balance} />} />
+          <Route exact path='/breakdown/:month' render={({ match }) => <MonthlyBreakdown  firstToUpperCase = {this.firstToUpperCase} transactions={this.state.transactions} match={match} />} />
         </div>
       </Router>
       : null)
