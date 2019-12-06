@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const Transaction = require('../model/Transection')
-const moment = require('moment')
 
 router.post('/transactions', function(req,res){
     const transaction = new Transaction(req.body.transaction)
