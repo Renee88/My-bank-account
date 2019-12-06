@@ -72,8 +72,18 @@ body{
   justify-self: center;
 }
 
-#buttons:hover{
+.button:hover{
   cursor: pointer;
+  font-size: 12px;
+  width: fit-content;
+  height: fit-content;
+}
+
+.button:active{
+  cursor: pointer;
+  font-size: 10px;
+  width: fit-content;
+  height: fit-content;
 }
 
 
@@ -160,7 +170,15 @@ color: black;
 
 .link:hover {
   cursor: pointer;
-  background-color: #E7D8C9;
+  font-size: 23px;
+  height: fit-content;
+  width: fit-content
+}
+
+.link:active {
+  font-size: 21px;
+  height: fit-content;
+  width: fit-content;
 }
 
 .deposit, .positive{
