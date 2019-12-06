@@ -278,3 +278,8 @@ color: black;
   padding: 4px;
   /* border-radius: 10px; */
 }
+
+.modal-container{
+  display: grid;
+  grid-template-columns: 1fr;
+}
