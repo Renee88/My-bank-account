@@ -14,10 +14,10 @@ class MonthlyBreakdown extends Component {
         monthlyBalance.map(t => groupedBalance[t.category] ? groupedBalance[t.category] += t.amount:groupedBalance[t.category] = t.amount)
         let categories = Object.keys(groupedBalance)
        
-        return (
+        return (categories.length?
             <div id="monthly-breakdown">
-               {categories.length? <div className="month-name">{this.props.match.params.month}</div>:null}
-                 <div id = "monthlyBreak-title"className="group title"><div>Group</div> <div>Total</div></div>
+                <div className="month-name">{this.props.match.params.month}</div>
+                <div id = "monthlyBreak-title"className="group title"><div>Group</div> <div>Total</div></div>
                 {categories.map(c => {
                     return <div className={groupedBalance[c] > 0 ? "group positive grouped-trans" : "group negative grouped-trans"}>
                         <div className={c}>{this.firstToUpperCase(c)}</div>
@@ -25,7 +25,7 @@ class MonthlyBreakdown extends Component {
                     </div>
                 })}
             </div> 
-            
+            : <div className="month-name">{this.props.match.params.month}</div>
         );
     }
 }

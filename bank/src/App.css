@@ -61,7 +61,8 @@ body{
   grid-area: oper;
   display: grid;
   background-color: white;
-  width: 30%;
+  width: 300px;
+  height: 400px;
   justify-self: center;
   margin-top: 30px;
 
@@ -235,12 +236,18 @@ color: black;
   overflow: auto;
   z-index: 1;
   background-color: white;
-  width: 11%;
-  padding-bottom: 3px;
+  width: 5vw;
+  padding: 3px;
   opacity: 0.8;
+  left: 47.5vw;
+  border-radius: 3px;
   text-align: center;
+}
 
-
+.month{
+  font-size: 15px;
+  margin: 10px;
+  font-family: 'Lobster', cursive;
 }
 
 #drop-down-menu:hover .months{
@@ -257,7 +264,7 @@ color: black;
 
 .month-name{
   display: grid;
-  margin: 5px;
+  margin: 10px;
   width: 25%;
   justify-self: center;
   justify-content: center;
@@ -312,7 +319,20 @@ color: black;
   font-family: 'Calistoga', cursive;
 }
 
+#placeholder{
+  background-color: #E7D8C9 ;
+  height: fit-content;
+  padding: 5px;
+  box-shadow: 5px 5px 5px #B2967D;
+  color: black;
+  font-family: 'Lobster', cursive;
+}
+
 .modal-container{
   display: none;
   position: absolute;
+}
+
+.nothing-to-display{
+  text-align: center;
 }

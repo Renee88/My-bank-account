@@ -9,9 +9,9 @@ class SelectMonth extends Component {
         let months = moment.monthsShort()
         return (
             <div id="drop-down-menu">
-                    <div id="placeholder" className="link">Select a month</div>
+                    <div id="placeholder" >Select a month</div>
                     <div className="months">
-                        {months.map(m => <Link to={`/breakdown/${m}`} ><div id ={m} >{m}</div></ Link>)}
+                        {months.map(m => <Link to={`/breakdown/${m}`} ><div id ={m} className = "month" >{m}</div></ Link>)}
                     </div>
                 </div>
         );

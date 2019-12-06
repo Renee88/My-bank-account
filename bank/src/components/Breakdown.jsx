@@ -31,7 +31,7 @@ class Breakdown extends Component {
                             </div>
                         </div>
                     })}
-                </div> : null}
+                </div> : <p className = "nothing-to-display">No transactions to display</p>}
             </div>
 
         )
