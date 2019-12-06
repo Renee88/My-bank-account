@@ -37,7 +37,7 @@ class App extends Component {
 
   withdraw = async (amount, vendor, category, date) => {
     let transaction = { amount: -parseInt(amount), vendor: vendor, category: category.toLowerCase(), date: date }
-    let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
+    let transactions = await axios.post('/transactions', { transaction })
     transactions = transactions.data.map(t => {
       return {
         _id: t._id,
@@ -55,7 +55,7 @@ class App extends Component {
 
   deposit = async (amount, vendor, category, date) => {
     let transaction = { amount: parseInt(amount), vendor: vendor, category: category.toLowerCase(), date: date }
-    let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
+    let transactions = await axios.post('/transactions', { transaction })
     transactions = transactions.data.map(t => {
       return {
         _id: t._id,
@@ -81,7 +81,7 @@ class App extends Component {
 
 
   removeTransaction = async (id) => {
-    let transactions = await axios.delete('http://localhost:1309/transactions', { data: { id: id } })
+    let transactions = await axios.delete('/transactions', { data: { id: id } })
     transactions = transactions.data.map(t => {
       return {
         _id: t._id,
@@ -96,7 +96,7 @@ class App extends Component {
 
 
   async updateTransactions() {
-    return await axios.get('http://localhost:1309/transactions')
+    return await axios.get('/transactions')
   }
 
   firstToUpperCase = (word) => {
@@ -104,7 +104,7 @@ class App extends Component {
   }
 
   breakdown = async () => {
-    let groupedTransactions = await axios.get('http://localhost:1309/breakdown')
+    let groupedTransactions = await axios.get('/breakdown')
     this.setState({ balance: groupedTransactions.data })
   }
 
