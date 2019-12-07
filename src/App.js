@@ -23,6 +23,7 @@ class App extends Component {
         date: ""
       },
       balance: [],
+      length: 0,
       updated: false,
       monthlyBalance: []
     }
@@ -48,8 +49,9 @@ class App extends Component {
       }
     })
     let updated = this.state.updated
-    transactions.length ? updated = true : updated = false
-    this.setState({ transactions: transactions, updated: updated })
+    let length = this.state.length
+    transactions.length != length ? updated = true : updated = false
+    this.setState({ transactions: transactions, updated: updated, length: length++ })
   }
 
 
@@ -66,8 +68,9 @@ class App extends Component {
       }
     })
     let updated = this.state.updated
-    transactions.length ? updated = true : updated = false
-    this.setState({ transactions: transactions, updated: updated })
+    let length = this.state.length
+    transactions.length != length ? updated = true : updated = false
+    this.setState({ transactions: transactions, updated: updated,length: length++ })
   }
 
   updateNewTransaction = (e) => {

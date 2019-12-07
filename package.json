@@ -15,8 +15,12 @@
     "date-fns": "^2.0.0-beta.5",
     "express": "^4.17.1",
     "moment": "^2.24.0",
+<<<<<<< HEAD:package.json
     "mongoose": "^5.7.13",
     "path": "^0.12.7",
+=======
+    "mongoose": "^5.7.14",
+>>>>>>> backup:bank/package.json
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
