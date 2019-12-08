@@ -27,7 +27,7 @@ body{
 }
 
 #main-container{
-  background-color: #EEE4E1;
+  background-color: #373E40;
   display: grid;
   grid-template-areas:"nav" 
                       "oper"
@@ -105,11 +105,11 @@ input{
 }
 
 #withdraw{
-  background-color: red;
+  background-color: #F42C04;
 }
 
 #deposit{
-  background-color: green;
+  background-color: #99F7AB;
 }
 
 
@@ -163,10 +163,9 @@ color: black;
 }
 
 .link{
-  background-color: #E7D8C9 ;
   height: fit-content;
   padding: 5px;
-  box-shadow: 5px 5px 5px #B2967D;
+  /* box-shadow: 5px 5px 5px #B2967D; */
   color: black;
   font-family: 'Lobster', cursive;
 }
@@ -185,11 +184,11 @@ color: black;
 }
 
 .deposit, .positive{
-  background-color: green;
+  background-color: #99F7AB;
 }
 
 .withdraw, .negative{
-  background-color: red;
+  background-color: #F42C04;
 }
 
 .group{
@@ -216,7 +215,7 @@ color: black;
 .title{
   display: grid;
   justify-items: center;
-  color: #A9700F;
+  color: black;
   padding: 10px;
   background-color: white;
   font-family: 'Lobster', cursive;
@@ -280,6 +279,7 @@ color: black;
 
 #nav{
   grid-area: nav;
+  background-color: #77878B ;
   display: grid;
   height: fit-content;
 }
@@ -323,10 +323,10 @@ color: black;
 }
 
 #placeholder{
-  background-color: #E7D8C9 ;
+  background-color: #77878B ;
   height: fit-content;
   padding: 5px;
-  box-shadow: 5px 5px 5px #B2967D;
+  margin-top:10px;
   color: black;
   font-family: 'Lobster', cursive;
 }

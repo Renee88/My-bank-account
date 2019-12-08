@@ -11,7 +11,7 @@ class MonthlyBreakdown extends Component {
         let transactions = this.props.transactions
         let monthlyBalance = transactions.filter(t => t.date.includes(month))
         let groupedBalance = {}
-        monthlyBalance.map(t => groupedBalance[t.category] ? groupedBalance[t.category] += t.amount:groupedBalance[t.category] = t.amount)
+        monthlyBalance.forEach(t => groupedBalance[t.category] ? groupedBalance[t.category] += t.amount : groupedBalance[t.category] = t.amount)
         let categories = Object.keys(groupedBalance)
        
         return (categories.length?

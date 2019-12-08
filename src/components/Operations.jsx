@@ -27,7 +27,7 @@ class Operations extends Component {
                     <input type="text" name="category" placeholder="Insert category" onChange={this.updateNewTransaction}></input>
                 </div>
                     <div id="date"><DatePickerDialog updateDate={this.props.updateDate} /></div>
-                    <Snackbars withdraw = {this.withdraw} deposit = {this.deposit} didUpdate = {this.props.didUpdate}/>
+                    <Snackbars balance = {this.props.balance} withdraw = {this.withdraw} deposit = {this.deposit} didUpdate = {this.props.didUpdate}/>
                 </div>
                 );
             }

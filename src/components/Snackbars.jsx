@@ -42,7 +42,7 @@ export default function Snackbars(props) {
       <Button onClick={handleClick(TransitionUp)}> <div id="withdraw" className = "button" onClick={props.withdraw}>Withdraw</div> </Button>
       <Snackbar
          open={open}
-         autoHideDuration={6000}
+         autoHideDuration={3000}
          onClose={handleClose}
          ContentProps={{
            'aria-describedby': 'message-id',
