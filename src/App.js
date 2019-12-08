@@ -35,11 +35,14 @@ class App extends Component {
     return balance
   }
 
+  setUpdated(transactions){
+    let updated 
+    let length = this.state.length
+    return transactions.length != length ? updated = true : updated = false
+  }
 
-  withdraw = async (amount, vendor, category, date) => {
-    let transaction = { amount: -parseInt(amount), vendor: vendor, category: category.toLowerCase(), date: date }
-    let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
-    transactions = transactions.data.map(t => {
+  retrieveTransactionsFromDB(transactions){
+    return transactions.data.map(t => {
       return {
         _id: t._id,
         amount: t.amount,
@@ -48,29 +51,32 @@ class App extends Component {
         date: moment(t.date).format("MMM Do YY")
       }
     })
-    let updated = this.state.updated
-    let length = this.state.length
-    transactions.length != length ? updated = true : updated = false
-    this.setState({ transactions: transactions, updated: updated, length: length++ })
+  }
+
+  
+  withdraw = async (amount, vendor, category, date) => {
+    let transaction = { amount: -parseInt(amount), vendor: vendor, category: category.toLowerCase(), date: date }
+    let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
+    transactions = this.retrieveTransactionsFromDB(transactions)
+    
+    let updated = this.setUpdated(transactions)
+    
+    updated ? 
+    this.setState({ transactions: transactions, updated: updated,length: this.state.length++ })
+    : this.setState({ updated: updated })
   }
 
 
   deposit = async (amount, vendor, category, date) => {
     let transaction = { amount: parseInt(amount), vendor: vendor, category: category.toLowerCase(), date: date }
     let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
-    transactions = transactions.data.map(t => {
-      return {
-        _id: t._id,
-        amount: t.amount,
-        vendor: t.vendor,
-        category: t.category,
-        date: moment(t.date).format("MMM Do YY")
-      }
-    })
-    let updated = this.state.updated
-    let length = this.state.length
-    transactions.length != length ? updated = true : updated = false
-    this.setState({ transactions: transactions, updated: updated,length: length++ })
+    transactions = this.retrieveTransactionsFromDB(transactions)
+    
+    let updated = this.setUpdated(transactions)
+    
+    updated ? 
+    this.setState({ transactions: transactions, updated, length: this.state.length++ })
+    : this.setState({ updated})
   }
 
   updateNewTransaction = (e) => {
@@ -144,7 +150,7 @@ class App extends Component {
           <div id="sum">Total: {this.balance()}$</div>
 
           <Route exact path='/transactions' render={() => <Transactions transData={this.state.transactions} removeTransaction={this.removeTransaction} firstToUpperCase = {this.firstToUpperCase} />} />
-          <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit}
+          <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit} balance = {this.balance()}
             updateNewTransaction={this.updateNewTransaction} updateDate={this.updateDate}
             newTransaction={this.state.newTransaction} didUpdate={this.state.updated} />} />
           <Route path='/breakdown' render={() => <Breakdown  firstToUpperCase = {this.firstToUpperCase} transactions={this.state.transactions} balance={this.state.balance} />} />
