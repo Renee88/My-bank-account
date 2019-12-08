@@ -144,7 +144,7 @@ class App extends Component {
           <div id="sum">Total: {this.balance()}$</div>
 
           <Route exact path='/transactions' render={() => <Transactions transData={this.state.transactions} removeTransaction={this.removeTransaction} firstToUpperCase = {this.firstToUpperCase} />} />
-          <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit} balance = {this.balance}
+          <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit}
             updateNewTransaction={this.updateNewTransaction} updateDate={this.updateDate}
             newTransaction={this.state.newTransaction} didUpdate={this.state.updated} />} />
           <Route path='/breakdown' render={() => <Breakdown  firstToUpperCase = {this.firstToUpperCase} transactions={this.state.transactions} balance={this.state.balance} />} />

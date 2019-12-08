@@ -47,9 +47,7 @@ export default function Snackbars(props) {
          ContentProps={{
            'aria-describedby': 'message-id',
          }}
-        message={<span id="message-id"> {props.didUpdate && props.balanace > -500 ? "Successfully updated" 
-        : props.balance < -500 ? "Withdrawal denied. Not enough money to perform this transaction." 
-        : "Update failed. Please try again"} </span>}
+        message={<span id="message-id"> {props.didUpdate? "Successfully updated" : "Update failed. Please try again"} </span>}
         action={[<IconButton
             key="close"
             aria-label="close"
