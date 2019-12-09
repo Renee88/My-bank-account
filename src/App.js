@@ -56,7 +56,7 @@ class App extends Component {
   
   withdraw = async (amount, vendor, category, date) => {
     let transaction = { amount: -parseInt(amount), vendor: vendor, category: category.toLowerCase(), date: date }
-    let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
+    let transactions = await axios.post('/transactions', { transaction })
     transactions = this.retrieveTransactionsFromDB(transactions)
     
     let updated = this.setUpdated(transactions)
@@ -69,7 +69,7 @@ class App extends Component {
 
   deposit = async (amount, vendor, category, date) => {
     let transaction = { amount: parseInt(amount), vendor: vendor, category: category.toLowerCase(), date: date }
-    let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
+    let transactions = await axios.post('/transactions', { transaction })
     transactions = this.retrieveTransactionsFromDB(transactions)
     
     let updated = this.setUpdated(transactions)
