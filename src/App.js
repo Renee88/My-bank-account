@@ -54,9 +54,9 @@ class App extends Component {
   }
 
   
-  withdraw = async (amount, vendor, category, date) => {
-    let transaction = { amount: -parseInt(amount), vendor: vendor, category: category.toLowerCase(), date: date }
-    let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
+  withdraw = async (newTransaction) => {
+    newTransaction.amount = -parseInt(newTransaction.amount)
+    let transactions = await axios.post('http://localhost:1309/transactions', { newTransaction })
     transactions = this.retrieveTransactionsFromDB(transactions)
     
     let updated = this.setUpdated(transactions)
@@ -67,9 +67,9 @@ class App extends Component {
   }
 
 
-  deposit = async (amount, vendor, category, date) => {
-    let transaction = { amount: parseInt(amount), vendor: vendor, category: category.toLowerCase(), date: date }
-    let transactions = await axios.post('http://localhost:1309/transactions', { transaction })
+  deposit = async (newTransaction) => {
+    newTransaction.amount = parseInt(newTransaction.amount)
+    let transactions = await axios.post('http://localhost:1309/transactions', { newTransaction })
     transactions = this.retrieveTransactionsFromDB(transactions)
     
     let updated = this.setUpdated(transactions)
@@ -150,7 +150,7 @@ class App extends Component {
           <div id="sum">Total: {this.balance()}$</div>
 
           <Route exact path='/transactions' render={() => <Transactions transData={this.state.transactions} removeTransaction={this.removeTransaction} firstToUpperCase = {this.firstToUpperCase} />} />
-          <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit} balance = {this.balance()}
+          <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit} 
             updateNewTransaction={this.updateNewTransaction} updateDate={this.updateDate}
             newTransaction={this.state.newTransaction} didUpdate={this.state.updated} />} />
           <Route path='/breakdown' render={() => <Breakdown  firstToUpperCase = {this.firstToUpperCase} transactions={this.state.transactions} balance={this.state.balance} />} />
