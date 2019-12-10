@@ -63,7 +63,7 @@ class App extends Component {
     
     updated ? 
     this.setState({ transactions: transactions, updated: updated,length: this.state.length++ })
-    : this.setState({ updated: updated })
+    : null
   }
 
 
@@ -76,7 +76,7 @@ class App extends Component {
     
     updated ? 
     this.setState({ transactions: transactions, updated, length: this.state.length++ })
-    : this.setState({ updated})
+    : null
   }
 
   updateNewTransaction = (e) => {
