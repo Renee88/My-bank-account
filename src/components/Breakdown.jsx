@@ -9,29 +9,52 @@ class Breakdown extends Component {
         return this.props.firstToUpperCase(word)
     }
 
+    componentDidMount(){
+        this.props.breakdown()
+    }
+
     render() {
         let transactions = this.props.transactions
         return (
             <div id="breakdown-container">
                 <SelectMonth />
-                {transactions.length ? <div id="breakdown" >
-                    <div className="group title"><div>Group</div> <div>Total</div></div>
-                    {this.props.balance.map(g => {
-                        return <div className={g.amount > 0 ? "group positive transaction" : "group negative transaction"}>
-                            <div className={g._id}>{this.firstToUpperCase(g._id)}</div>
-                            <div className="total-per-group">{g.amount}</div>
-                            <div className="modal-container">
-                                {transactions.filter(t => t.category === g._id).map(t => {
-                                    return <div className="modal">
-                                        <span>{t.date}</span>
-                                        <span>{t.vendor}</span>
-                                        <span>{this.firstToUpperCase(t.category)}</span>
-                                        <span>{t.amount}</span></div>
-                                })}
-                            </div>
-                        </div>
-                    })}
-                </div> : <p className = "nothing-to-display">No transactions to display</p>}
+                {transactions.length ?
+                    <div id="breakdown" >
+                        <table id="breakdown-table">
+                            <tr className="group title"><th>Group</th> <th>Total</th></tr>
+                            {this.props.balance.map(g => {
+                                return (
+                                    <tr className={g.amount > 0 ? "group positive transaction" : "group negative transaction"}>
+                                        <td className={g._id}>{this.firstToUpperCase(g._id)}</td>
+                                        <td className="total-per-group">{g.amount}</td>
+                                    </tr>
+                                )
+                            })}
+                        </table>
+                        <div className="modal-container">
+                            {this.props.balance.map(g => {
+                                return(
+                                transactions.filter(t => t.category === g._id).map(t => {
+                                    return <table className="modal">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Vendor</th>
+                                            <th>Category</th>
+                                            <th>{'Amount($)'}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>{t.date}</td>
+                                            <td>{t.vendor}</td>
+                                            <td>{this.firstToUpperCase(t.category)}</td>
+                                            <td>{t.amount}</td>
+                                        </tr>
+                                    </table>
+                                })
+                            )})}
+                            }
+            
+                                    </div>
+                    </div> : <p className="nothing-to-display">No transactions to display</p>}
             </div>
 
         )

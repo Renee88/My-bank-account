@@ -19,17 +19,19 @@ function Operations(props) {
         props.updateNewTransaction(e)
     }
 
+    console.log(props.didUpdate)
+
     return (
         <div id="new-expense">
             <div id="inputs">
                 <input type="text" name="amount" placeholder="Insert amount" onChange={updateNewTransaction}></input>
-                <input type="text" name="vendor" placeholder="Insert vendor" onChange={updateNewTransaction}></input>
+                <input type="text" name="vendor"  placeholder="Insert vendor" onChange={updateNewTransaction}></input>
                 <input type="text" name="category" placeholder="Insert category" onChange={updateNewTransaction}></input>
             </div>
 
-            <div id="date"><DatePickerDialog updateDate={props.updateDate} /></div>
+            <span id ="date"><DatePickerDialog updateDate={props.updateDate} /></span>
 
-            <Snackbars deposit = {deposit} withdraw ={withdraw} />
+            <Snackbars deposit = {deposit} withdraw ={withdraw} didUpdate = {props.didUpdate}/>
         </div>
     );
 
