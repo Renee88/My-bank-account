@@ -122,7 +122,7 @@ class App extends Component {
 
 
   removeTransaction = async (id) => {
-    let transactions = await axios.delete('/transactions', { data: { id: id } })
+    let transactions = await axios.delete('http://localhost:1309/transactions', { data: { id: id } })
     transactions = transactions.data.map(t => {
       return {
         _id: t._id,
@@ -137,7 +137,7 @@ class App extends Component {
 
 
   async updateTransactions() {
-    return await axios.get('/transactions')
+    return await axios.get('http://localhost:1309/transactions')
   }
 
   firstToUpperCase = (word) => {
@@ -145,7 +145,7 @@ class App extends Component {
   }
 
   breakdown = async () => {
-    let groupedTransactions = await axios.get('/breakdown')
+    let groupedTransactions = await axios.get('http://localhost:1309/breakdown')
     this.setState({ balance: groupedTransactions.data })
   }
 

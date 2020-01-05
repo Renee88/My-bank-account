@@ -21,7 +21,7 @@ class Breakdown extends Component {
                 {transactions.length ?
                     <div id="breakdown" >
                         <table id="breakdown-table">
-                            <tr className="group title"><th>Group</th> <th>Total</th></tr>
+                            <tr className="group title"><th>Group</th> <th>{'Total($)'}</th></tr>
                             {this.props.balance.map(g => {
                                 return (
                                     <tr className={g.amount > 0 ? "group positive transaction" : "group negative transaction"}>

@@ -22,7 +22,7 @@ class MonthlyBreakdown extends Component {
             <div id="monthly-breakdown">
                 <div className="month-name">{this.props.match.params.month}</div>
                 <table id="monthly-breakdown-table">
-                    <tr id="monthlyBreak-title" className="group title"><th>Group</th> <th>Total</th></tr>
+                    <tr id="monthlyBreak-title" className="group title"><th>Group</th> <th>{'Total($)'}</th></tr>
                     {categories.map(c => {
                         return <tr className={groupedBalance[c] > 0 ? "group positive grouped-trans" : "group negative grouped-trans"}>
                             <td className={c}>{this.firstToUpperCase(c)}</td>
