@@ -217,19 +217,16 @@ color: black;
 }
 
 #monthly-breakdown{
-  margin-top: 15px;
   display: flex;
+  position: inherit;
   flex-direction: column;
-  position: absolute;
-  bottom: 0;
+  position: inherit;
   justify-content: center;
   padding-right: 10px;
   padding-left: 5px;
   background-image: linear-gradient(-45deg,white,#82DDF0,#DCEDFF,#54C6EB);
   border-radius: 5px;
-  margin: 10px;
   text-align: center;
-  width: fit-content;
   box-shadow: 2px 2px 3px #1B2021;
 } 
 
