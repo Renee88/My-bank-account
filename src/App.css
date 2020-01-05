@@ -16,12 +16,14 @@ body{
   position: absolute;
   height: 100vh;
   width: 100vw;
-  background-image: linear-gradient(-45deg,white,#82DDF0,#DCEDFF,#54C6EB);
+  background-image: linear-gradient(180deg,white,#F7F7F2,#BCBDC0,#F7F7F2);
+  background-color: #FFFBFF;
   font-size: 35px;
 }
 
 #transactions{
-  background-image: linear-gradient(-45deg,white,#82DDF0,#DCEDFF,#54C6EB);
+  /* background-image: linear-gradient(-45deg,white,#82DDF0,#DCEDFF,#54C6EB); */
+  background-color: #8AE1FC;
   border-radius: 5px;
   box-shadow: 2px 2px 5px #1B2021;
   width:95vw;
@@ -30,14 +32,15 @@ body{
 
 #main-container{
   display: flex;
-  background-image: linear-gradient(180deg,white,#F7F7F2,#BCBDC0,#F7F7F2);
+  background-color: #FFFBFF;
   flex-direction: column;
   align-items: center;
   height: 90vh;
 }
 
 #sum{
-  background-image: linear-gradient(-45deg,white,#82DDF0,#DCEDFF,#54C6EB);
+  /* background-image: linear-gradient(-45deg,white,#82DDF0,#DCEDFF,#54C6EB); */
+  background-color: #7678ED;
   border-radius: 5px;
   padding: 10px;
   font-size: 24px;
@@ -165,7 +168,7 @@ color: black;
   justify-content: center;
   padding-right: 10px;
   padding-left: 5px;
-  background-image: linear-gradient(-45deg,white,#82DDF0,#DCEDFF,#54C6EB);
+  background-color: #3D348B;
   border-radius: 5px;
   margin: 10px;
   text-align: center;
@@ -176,6 +179,7 @@ color: black;
 
 
 .title{
+  color:#FFFBFF;
   font-size: 12px;
 }
 
@@ -224,7 +228,8 @@ color: black;
   justify-content: center;
   padding-right: 10px;
   padding-left: 5px;
-  background-image: linear-gradient(-45deg,white,#82DDF0,#DCEDFF,#54C6EB);
+  /* background-image: linear-gradient(-45deg,white,#82DDF0,#DCEDFF,#54C6EB); */
+  background-color: #3D348B;
   border-radius: 5px;
   text-align: center;
   box-shadow: 2px 2px 3px #1B2021;
@@ -246,13 +251,13 @@ color: black;
     height: fit-content;
     padding: 10px;
     text-align: center;
-    color: #1B2021;
+    color: #FFFBFF;
     font-family: 'Courier Prime', monospace;
 }
 
 #nav{
   height: 10vh;
-  background-image: linear-gradient(-45deg,white,#82DDF0,#DCEDFF,#54C6EB);
+  background-color: #FFFBFF;
   font-family: 'Courier Prime', monospace;
 }
 
@@ -305,8 +310,9 @@ color: black;
 }
 
 #placeholder{
-  background-image: linear-gradient(-45deg,white,#82DDF0,#DCEDFF,#54C6EB);
+  background-color: #F35B04;
   box-shadow: 0px 2px 3px black;
+  color: #FFFBFF;
   margin-top: 30px;
   padding: 5px;
   width: 45vw;
