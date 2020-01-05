@@ -21,18 +21,16 @@ Follow the next steps to run the app on your machine.
 
 - A press on the hamburger icon leads the user to a drawer menu.
 
-![](/images/Drawer.png)
+<img src ="images/Drawer.png" height = 400>
 
 - The add expense link leads to a form, for the user to fill with the transaction details.
 
-![](/images/NewTransaction.png)
-
+<img src ="/images/NewTransaction.png" height = 400>
 
 - The link "Watch expenses" shows the user a detailed list of all the transactions that have been made.
 
-![](/images/Balance.png)
-
+<img src ="/images/Balance.png" height = 400>
 
 - Expenses breakdown page showes the monthly and total breakdown of the user's transactions. The transactions are grouped by category.
 
-![](/images/Breakdown.png)
+<img src ="/images/Breakdown.png" height = 400>
