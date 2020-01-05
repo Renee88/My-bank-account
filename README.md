@@ -16,7 +16,7 @@ Follow the next steps to run the app on your machine.
 
 - As the user enters the app a landing page is displayed
 
-![](/images/Landing.png)
+<img src ="/images/Landing.png" height = 400>
 
 
 - A press on the hamburger icon leads the user to a drawer menu.
