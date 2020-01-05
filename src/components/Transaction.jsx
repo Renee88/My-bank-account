@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class Transaction extends Component {
     removeTransaction = () =>{
@@ -11,18 +12,15 @@ class Transaction extends Component {
 
     render() {
         let transaction = this.props.singleTransData
-        let vendor = transaction.vendor
-        let category = transaction.category
-
-        console.log(transaction)
+        transaction.date = moment(transaction.date).format('L')
         return (
-             <div className={transaction.amount >= 0 ? "transaction deposit": "transaction withdraw"} > 
-                <div className = "date data">{transaction.date}</div>
-                <div className = "vendor data">{transaction.vendor}</div>
-                <div className = "category data">{this.firstToUpperCase(transaction.category)}</div>
-                <div className = "amount data">{transaction.amount}</div>
-                <div className = "delete data" onClick = {this.removeTransaction}>Delete</div>
-            </div>
+             <tr className={transaction.amount >= 0 ? "transaction deposit": "transaction withdraw"} > 
+                <td className = "date data">{transaction.date}</td>
+                <td className = "vendor data">{transaction.vendor}</td>
+                <td className = "category data">{this.firstToUpperCase(transaction.category)}</td>
+                <td className = "amount data">{transaction.amount}</td>
+                <td className = "delete data" onClick = {this.removeTransaction}><i className="fas fa-trash-alt"></i></td>
+            </tr>
         );
     }
 }

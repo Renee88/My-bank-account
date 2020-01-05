@@ -8,6 +8,7 @@ import Breakdown from './components/Breakdown';
 import moment from 'moment'
 import MonthlyBreakdown from './components/MonthlyBreakdown'
 import Home from './components/Home';
+import Landing from './components/Landing';
 
 
 class App extends Component {
@@ -23,65 +24,96 @@ class App extends Component {
         date: ""
       },
       balance: [],
-      length: 0,
       updated: false,
       monthlyBalance: []
     }
   }
 
-  balance = () => {
+  balance = (transactions) => {
     let balance = 0
-    this.state.transactions.forEach(t => balance += t.amount)
+    transactions.forEach(t => balance += t.amount)
     return balance
   }
 
-  setUpdated(transactions){
-    let updated 
-    let length = this.state.length
-    return transactions.length != length ? updated = true : updated = false
-  }
 
-  retrieveTransactionsFromDB(transactions){
+  retrieveTransactionsFromDB(transactions) {
     return transactions.data.map(t => {
       return {
         _id: t._id,
         amount: t.amount,
         vendor: t.vendor,
         category: t.category,
-        date: moment(t.date).format("MMM Do YY")
+        date: moment(t.date).format("L")
       }
     })
   }
 
-  
-  withdraw = async (amount, vendor, category, date) => {
-    let transaction = { amount: -parseInt(amount), vendor: vendor, category: category.toLowerCase(), date: date }
-    let transactions = await axios.post('/transactions', { transaction })
-    transactions = this.retrieveTransactionsFromDB(transactions)
-    
-    let updated = this.setUpdated(transactions)
-    
-    updated ? 
-    this.setState({ transactions: transactions, updated: updated,length: this.state.length++ })
-    : null
+  clearForm = (newTransaction) => {
+    for (let input of document.getElementsByTagName("INPUT")) {
+      input.value = ""
+      newTransaction[input.name] = input.value
+    }
   }
 
 
-  deposit = async (amount, vendor, category, date) => {
-    let transaction = { amount: parseInt(amount), vendor: vendor, category: category.toLowerCase(), date: date }
-    let transactions = await axios.post('/transactions', { transaction })
-    transactions = this.retrieveTransactionsFromDB(transactions)
-    
-    let updated = this.setUpdated(transactions)
-    
-    updated ? 
-    this.setState({ transactions: transactions, updated, length: this.state.length++ })
-    : null
+  isUpdated = async (newTransaction, newBalance) => {
+    let transactions
+    let updated
+    try {
+      if (newTransaction.amount && newTransaction.vendor && newTransaction.category) {
+        try {
+          if (newBalance > -500) {
+            try {
+              transactions = await axios.post('http://localhost:1309/transactions', { newTransaction })
+              transactions = transactions.data
+              this.clearForm(newTransaction)
+              updated = true
+              this.setState({ transactions, newTransaction, updated })
+            } catch (error) {
+              if(error.request || error.response){
+                debugger
+                updated = '404'
+                this.setState({ updated })
+              }
+            }
+          } else {
+            throw new Error('You Passed the allowed limit for withdrawal')
+          }
+        } catch (err) {
+          updated = '418'
+          this.setState({ updated })
+        }
+      } 
+      else if (!newTransaction.amount || !newTransaction.vendor || !newTransaction.category) {
+        throw new Error('Please fill in the required fields')
+      }
+    } catch (err) {
+      updated = '400'
+      this.setState({ updated })
+    }
+  }
+
+
+  withdraw = async (newTransaction) => {
+    newTransaction.amount = newTransaction.amount !== "" ? -parseInt(newTransaction.amount) : undefined
+    newTransaction.vendor = newTransaction.vendor !== "" ? newTransaction.vendor : undefined
+    newTransaction.category = newTransaction.category !== "" ? newTransaction.category : undefined
+    let newBalance = this.balance(this.state.transactions) + newTransaction.amount
+    await this.isUpdated(newTransaction, newBalance)
+  }
+
+  deposit = async (newTransaction) => {
+    newTransaction.amount = newTransaction.amount !== "" ? parseInt(newTransaction.amount) : undefined
+    newTransaction.vendor = newTransaction.vendor !== "" ? newTransaction.vendor : undefined
+    newTransaction.category = newTransaction.category !== "" ? newTransaction.category : undefined
+    let newBalance = this.balance(this.state.transactions) + newTransaction.amount
+    await this.isUpdated(newTransaction, newBalance)
   }
 
   updateNewTransaction = (e) => {
     let value = e.target.value
     let name = e.target.name
+    console.log(value)
     let newTransaction = this.state.newTransaction
     newTransaction[name] = value
     this.setState({ newTransaction })
@@ -97,10 +129,10 @@ class App extends Component {
         amount: t.amount,
         vendor: t.vendor,
         category: t.category,
-        date: moment(t.date).format("MMM Do YY")
+        date: moment(t.date).format('L')
       }
     })
-    this.setState({ transactions: transactions })
+    this.setState({ transactions })
   }
 
 
@@ -134,27 +166,27 @@ class App extends Component {
         amount: t.amount,
         vendor: t.vendor,
         category: t.category,
-        date: moment(t.date).format("MMM Do YY")
+        date: moment(t.date).format("L")
       }
     })
-    this.setState({ transactions: transactions })
+    this.setState({ transactions })
   }
 
   render() {
 
     return (this.state.transactions ?
       <Router>
+        <Route exact path = '/' render ={()=> <Landing />} />
+        <Route path='/' render={() => <Home transactions={this.state.transactions} groupByMonth={this.groupByMonth} breakdown={this.breakdown} />} />
         <div id="main-container">
+          <div id="sum"><div>Balance</div><div id="num">{this.balance(this.state.transactions)}$</div></div>
 
-          <Route path='/' render={() => <Home transactions={this.state.transactions} groupByMonth={this.groupByMonth} breakdown={this.breakdown} />} />
-          <div id="sum">Total: {this.balance()}$</div>
-
-          <Route exact path='/transactions' render={() => <Transactions transData={this.state.transactions} removeTransaction={this.removeTransaction} firstToUpperCase = {this.firstToUpperCase} />} />
-          <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit} balance = {this.balance()}
+          <Route exact path='/transactions' render={() => <Transactions transData={this.state.transactions} removeTransaction={this.removeTransaction} firstToUpperCase={this.firstToUpperCase} />} />
+          <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit}
             updateNewTransaction={this.updateNewTransaction} updateDate={this.updateDate}
             newTransaction={this.state.newTransaction} didUpdate={this.state.updated} />} />
-          <Route path='/breakdown' render={() => <Breakdown  firstToUpperCase = {this.firstToUpperCase} transactions={this.state.transactions} balance={this.state.balance} />} />
-          <Route exact path='/breakdown/:month' render={({ match }) => <MonthlyBreakdown  firstToUpperCase = {this.firstToUpperCase} transactions={this.state.transactions} match={match} />} />
+          <Route path='/breakdown' render={() => <Breakdown breakdown={this.breakdown} firstToUpperCase={this.firstToUpperCase} transactions={this.state.transactions} balance={this.state.balance} />} />
+          <Route exact path='/breakdown/:month' render={({ match }) => <MonthlyBreakdown firstToUpperCase={this.firstToUpperCase} transactions={this.state.transactions} match={match} />} />
         </div>
       </Router>
       : null)

@@ -1,9 +1,15 @@
 import React from 'react';
-import {Button, Snackbar} from '@material-ui/core';
+import { Button, Snackbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import SuccessSnackbar from './SuccessSnackbar';
+import MySnackbarContentWrapper from './MySnackbarContentWrapper';
+import { useEffect } from 'react';
+import ErrorSnackbar from './ErrorSnackbar';
+import InfoSnackbar from './InfoSnackbar';
+import WarningSnackbar from './WarningSnackbar';
 
 const useStyles = makeStyles(theme => ({
   close: {
@@ -12,21 +18,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function TransitionUp(props) {
-  return <Slide {...props} direction="up" />;
-}
-
 export default function Snackbars(props) {
-
   const classes = useStyles();
-  const [transition, setTransition] = React.useState(undefined);
   const [open, setOpen] = React.useState(false);
+  const [updated, didUpdate] = React.useState(false)
 
-  const handleClick = Transition => () => {
-    setTransition(() => Transition);
-    setOpen(true);
-  };
-
+  useEffect(() => {
+    didUpdate(props.didUpdate)
+  })
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -36,28 +35,30 @@ export default function Snackbars(props) {
     setOpen(false);
   };
 
+
+  const deposit = async () => {
+    await props.deposit()
+    setOpen(true);
+    didUpdate(updated)
+  }
+
+  const withdraw = async () => {
+    await props.withdraw()
+    setOpen(true);
+    didUpdate(updated)
+  }
+
+  console.log(updated)
+
   return (
     <div id="buttons">
-      <Button onClick={handleClick(TransitionUp)}> <div id="deposit" className = "button" onClick={props.deposit}>Deposit</div> </Button>
-      <Button onClick={handleClick(TransitionUp)}> <div id="withdraw" className = "button" onClick={props.withdraw}>Withdraw</div> </Button>
-      <Snackbar
-         open={open}
-         autoHideDuration={3000}
-         onClose={handleClose}
-         ContentProps={{
-           'aria-describedby': 'message-id',
-         }}
-        message={<span id="message-id"> {props.didUpdate? "Successfully updated" : "Update failed. Please try again"} </span>}
-        action={[<IconButton
-            key="close"
-            aria-label="close"
-            color="inherit"
-            className={classes.close}
-            onClick={handleClose}
-          ><CloseIcon />
-          </IconButton>
-        ]}
-      />
+      <Button id="deposit" onClick={deposit}> Deposit</Button>
+      <Button id="withdraw" onClick={withdraw}> Withdraw </Button>
+      
+      {updated && updated !== "404" && updated !== "418" && updated !== "400" ? <SuccessSnackbar open={open} />
+        : updated == '400' ? <ErrorSnackbar open={open} />
+          : updated == '404' ? <InfoSnackbar open={open} />
+            : updated == '418' ? <WarningSnackbar open={open} /> : null}
     </div>
   );
 }

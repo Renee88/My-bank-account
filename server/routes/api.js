@@ -3,7 +3,7 @@ const router = express.Router()
 const Transaction = require('../model/Transection')
 
 router.post('/transactions', function(req,res){
-    const transaction = new Transaction(req.body.transaction)
+    const transaction = new Transaction(req.body.newTransaction)
     transaction.save(function(){
         Transaction.find({},function(err,transactions){
             res.send(transactions)

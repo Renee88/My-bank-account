@@ -1,36 +1,40 @@
 import React, { Component } from 'react';
 import DatePickerDialog from './DatePickerDialog';
-import Snackbars from './Snackbars';
+import Snackbars from './Snackbars'
 
-class Operations extends Component {
-    
-    withdraw = () => {
-        let newTransaction = this.props.newTransaction
-        this.props.withdraw(newTransaction.amount, newTransaction.vendor, newTransaction.category, newTransaction.date)
+
+
+function Operations(props) {
+
+
+    const withdraw = () => {
+        props.withdraw(props.newTransaction)
     }
 
-    deposit = () => {
-        let newTransaction = this.props.newTransaction
-        this.props.deposit(newTransaction.amount, newTransaction.vendor, newTransaction.category,newTransaction.date)
+    const deposit = () => {
+        props.deposit(props.newTransaction)
     }
 
-    updateNewTransaction = (e) => {
-        this.props.updateNewTransaction(e)
+    const updateNewTransaction = (e) => {
+        props.updateNewTransaction(e)
     }
 
-    render() {
-        return (
-            <div id="new-expense">
-                <div id="inputs">
-                    <input type="text" name="amount" placeholder="Insert amount" onChange={this.updateNewTransaction}></input>
-                    <input type="text" name="vendor" placeholder="Insert vendor" onChange={this.updateNewTransaction}></input>
-                    <input type="text" name="category" placeholder="Insert category" onChange={this.updateNewTransaction}></input>
-                </div>
-                    <div id="date"><DatePickerDialog updateDate={this.props.updateDate} /></div>
-                    <Snackbars balance = {this.props.balance} withdraw = {this.withdraw} deposit = {this.deposit} didUpdate = {this.props.didUpdate}/>
-                </div>
-                );
-            }
-        }
-        
+    console.log(props.didUpdate)
+
+    return (
+        <div id="new-expense">
+            <div id="inputs">
+                <input type="text" name="amount" placeholder="Insert amount" onChange={updateNewTransaction}></input>
+                <input type="text" name="vendor"  placeholder="Insert vendor" onChange={updateNewTransaction}></input>
+                <input type="text" name="category" placeholder="Insert category" onChange={updateNewTransaction}></input>
+            </div>
+
+            <span id ="date"><DatePickerDialog updateDate={props.updateDate} /></span>
+
+            <Snackbars deposit = {deposit} withdraw ={withdraw} didUpdate = {props.didUpdate}/>
+        </div>
+    );
+
+}
+
 export default Operations;

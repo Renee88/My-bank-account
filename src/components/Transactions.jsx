@@ -7,8 +7,10 @@ class Transactions extends Component {
         console.log(this.props.transData)
         return (
             this.props.transData.length ? <div id="transactions">
-                <div className="transaction title"><div>Date</div><div>Vendor</div> <div>Group</div><div>{'Amount($)'}</div></div>
+                <table>
+                <tr className="transaction title"><th className = "title-col">Date</th><th className ="title-col">Vendor</th> <th className = "title-col">Group</th> <th className = "title-col">{'Amount($)'}</th></tr>
                 {this.props.transData.map(t => <Transaction key={t._id} singleTransData={t} id={t._id} firstToUpperCase = {this.props.firstToUpperCase} removeTransaction={this.props.removeTransaction} />)}
+                </table>
             </div> : <p className = "nothing-to-display">No transactions to display</p>
         );
     }
