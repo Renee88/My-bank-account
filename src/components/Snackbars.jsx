@@ -48,7 +48,6 @@ export default function Snackbars(props) {
     didUpdate(updated)
   }
 
-  console.log(updated)
 
   return (
     <div id="buttons">

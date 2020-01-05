@@ -19,7 +19,6 @@ function Operations(props) {
         props.updateNewTransaction(e)
     }
 
-    console.log(props.didUpdate)
 
     return (
         <div id="new-expense">
