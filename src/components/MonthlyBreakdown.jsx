@@ -21,15 +21,14 @@ class MonthlyBreakdown extends Component {
         return (categories.length ?
             <div id="monthly-breakdown">
                 <div className="month-name">{this.props.match.params.month}</div>
-                <table id="monthly-breakdown-table">
-                    <tr id="monthlyBreak-title" className="group title"><th>Category</th> <th>{'Total($)'}</th></tr>
+                <div id="monthly-breakdown-table">
                     {categories.map(c => {
-                        return <tr className={groupedBalance[c] > 0 ? "group positive grouped-trans" : "group negative grouped-trans"}>
-                            <td className={c}>{this.firstToUpperCase(c)}</td>
-                            <td className="total-per-group">{groupedBalance[c]}</td>
-                        </tr>
+                        return <div className={groupedBalance[c] > 0 ? "positive grouped-trans" : "negative grouped-trans"}>
+                            <div className="group">{this.firstToUpperCase(c)}</div>
+                            <div className="total-per-group">{groupedBalance[c]}$</div>
+                        </div>
                     })}
-                </table>
+                </div>
             </div>
 
             : <div className="no-transactions">{`No transactions made in ${this.props.match.params.month}`}</div>

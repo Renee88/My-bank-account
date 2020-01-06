@@ -9,6 +9,8 @@ import moment from 'moment'
 import MonthlyBreakdown from './components/MonthlyBreakdown'
 import Home from './components/Home';
 import Landing from './components/Landing';
+import SelectMonth from './components/SelectMonth';
+
 
 
 class App extends Component {
@@ -185,7 +187,8 @@ class App extends Component {
           <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit}
             updateNewTransaction={this.updateNewTransaction} updateDate={this.updateDate}
             newTransaction={this.state.newTransaction} didUpdate={this.state.updated} />} />
-          <Route path='/breakdown' render={() => <Breakdown breakdown={this.breakdown} firstToUpperCase={this.firstToUpperCase} transactions={this.state.transactions} balance={this.state.balance} />} />
+          {/* <Route path='/breakdown' render={() => <Breakdown breakdown={this.breakdown} firstToUpperCase={this.firstToUpperCase} transactions={this.state.transactions} balance={this.state.balance} />} /> */}
+          <Route path='/breakdown' render={() => <SelectMonth />} />
           <Route exact path='/breakdown/:month' render={({ match }) => <MonthlyBreakdown firstToUpperCase={this.firstToUpperCase} transactions={this.state.transactions} match={match} />} />
         </div>
       </Router>
