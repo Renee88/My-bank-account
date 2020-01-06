@@ -20,17 +20,16 @@ class Breakdown extends Component {
                 <SelectMonth />
                 {transactions.length ?
                     <div id="breakdown" >
-                        <table id="breakdown-table">
-                            <tr className="group title"><th>Category</th> <th>{'Total($)'}</th></tr>
+                        
                             {this.props.balance.map(g => {
                                 return (
-                                    <tr className={g.amount > 0 ? "group positive transaction" : "group negative transaction"}>
-                                        <td className={g._id}>{this.firstToUpperCase(g._id)}</td>
-                                        <td className="total-per-group">{g.amount}</td>
-                                    </tr>
+                                    <div className={g.amount > 0 ? "group positive transaction" : "group negative transaction"}>
+                                        <div className={g._id}>{this.firstToUpperCase(g._id)}</div>
+                                        <div className="total-per-group">{g.amount}$</div>
+                                    </div>
                                 )
                             })}
-                        </table>
+                        
                         <div className="modal-container">
                             {this.props.balance.map(g => {
                                 return(

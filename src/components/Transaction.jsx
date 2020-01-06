@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 class Transaction extends Component {
-    removeTransaction = () =>{
+    removeTransaction = () => {
         this.props.removeTransaction(this.props.id)
     }
 
-    firstToUpperCase = (word) =>{
+    firstToUpperCase = (word) => {
         return this.props.firstToUpperCase(word)
     }
 
@@ -14,13 +14,19 @@ class Transaction extends Component {
         let transaction = this.props.singleTransData
         transaction.date = moment(transaction.date).format('L')
         return (
-             <tr className={transaction.amount >= 0 ? "transaction deposit": "transaction withdraw"} > 
-                <td className = "date data">{transaction.date}</td>
-                <td className = "vendor data">{transaction.vendor}</td>
-                <td className = "category data">{this.firstToUpperCase(transaction.category)}</td>
-                <td className = "amount data">{transaction.amount}</td>
-                <td className = "delete data" onClick = {this.removeTransaction}><i className="fas fa-trash-alt"></i></td>
-            </tr>
+            <div className={transaction.amount >= 0 ? "transaction deposit" : "transaction withdraw"} >
+                <div class="left">
+                    <div className="amount">{transaction.amount}$</div>
+                </div>
+                <div className="middle">
+                    <div className="vendor data">{transaction.vendor}</div>
+                    <div className="category data">{this.firstToUpperCase(transaction.category)}</div>
+                </div>
+                <div class="right">
+                    <div className="date data">{transaction.date}</div>
+                    <div className="delete data" onClick={this.removeTransaction}><i className="fas fa-trash-alt"></i></div>
+                </div>
+            </div>
         );
     }
 }
