@@ -57,7 +57,7 @@ body{
   position: absolute;
   height: 100vh;
   width: 100vw;
-  background-image: linear-gradient(180deg,white,#F7F7F2,#BCBDC0,#F7F7F2);
+  background-image: linear-gradient(45deg, #FE8F8F, #FEB880);
   background-color: #FFFBFF;
   font-size: 35px;
 }
