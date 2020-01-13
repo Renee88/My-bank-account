@@ -121,7 +121,9 @@ class App extends Component {
     this.setState({ newTransaction })
   }
 
-
+  resetUpdated = () =>{
+    this.setState({updated: false})
+  }
 
   removeTransaction = async (id) => {
     let transactions = await axios.delete('http://localhost:1309/transactions', { data: { id: id } })
@@ -186,7 +188,7 @@ class App extends Component {
           <Route exact path='/transactions' render={() => <Transactions transData={this.state.transactions} removeTransaction={this.removeTransaction} firstToUpperCase={this.firstToUpperCase} />} />
           <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit}
             updateNewTransaction={this.updateNewTransaction} updateDate={this.updateDate}
-            newTransaction={this.state.newTransaction} didUpdate={this.state.updated} />} />
+            newTransaction={this.state.newTransaction} didUpdate={this.state.updated} resetUpdated = {this.resetUpdated}/>} />
           {/* <Route path='/breakdown' render={() => <Breakdown breakdown={this.breakdown} firstToUpperCase={this.firstToUpperCase} transactions={this.state.transactions} balance={this.state.balance} />} /> */}
           <Route path='/breakdown' render={() => <SelectMonth />} />
           <Route exact path='/breakdown/:month' render={({ match }) => <MonthlyBreakdown firstToUpperCase={this.firstToUpperCase} transactions={this.state.transactions} match={match} />} />
