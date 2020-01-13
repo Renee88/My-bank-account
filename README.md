@@ -10,7 +10,10 @@ Follow the next steps to run the app on your machine.
 
 - Clone or download this directory.
 - Install the dependencies by running npm install in the root directory.
-- Run npm start
+- Run ```npm start```
+- Run ```mongod``` in the terminal
+- Run the server
+
 
 ## Available features and display
 
