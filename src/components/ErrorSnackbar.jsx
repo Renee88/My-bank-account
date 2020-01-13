@@ -18,7 +18,8 @@ export default function ErrorSnackbar(props) {
         if (reason === 'clickaway') {
             return;
         }
-
+        
+        props.resetUpdated()
         setOpen(false);
     };
 

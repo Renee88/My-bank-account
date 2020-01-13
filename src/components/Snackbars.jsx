@@ -24,16 +24,11 @@ export default function Snackbars(props) {
   const [updated, didUpdate] = React.useState(false)
 
   useEffect(() => {
+    console.log(updated)
+    console.log(open)
     didUpdate(props.didUpdate)
   })
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
 
 
   const deposit = async () => {
@@ -49,15 +44,19 @@ export default function Snackbars(props) {
   }
 
 
+
   return (
     <div id="buttons">
-      <Button id="deposit" onClick={deposit}> Deposit</Button>
-      <Button id="withdraw" onClick={withdraw}> Withdraw </Button>
+      <Button id="deposit"
+        onClick={deposit}> Deposit</Button>
       
-      {updated && updated !== "404" && updated !== "418" && updated !== "400" ? <SuccessSnackbar open={open} />
-        : updated == '400' ? <ErrorSnackbar open={open} />
-          : updated == '404' ? <InfoSnackbar open={open} />
-            : updated == '418' ? <WarningSnackbar open={open} /> : null}
+      <Button id="withdraw"
+        onClick={withdraw}> Withdraw </Button>
+
+      {updated && updated !== "404" && updated !== "418" && updated !== "400" ? <SuccessSnackbar open={open} resetUpdated = {props.resetUpdated}/>
+        : updated == '400' ? <ErrorSnackbar open={open} resetUpdated = {props.resetUpdated}/>
+          : updated == '404' ? <InfoSnackbar open={open} resetUpdated = {props.resetUpdated}/>
+            : updated == '418' ? <WarningSnackbar open={open} resetUpdated = {props.resetUpdated} /> : null}
     </div>
   );
 }

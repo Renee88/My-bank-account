@@ -30,7 +30,7 @@ function Operations(props) {
 
             <span id ="date"><DatePickerDialog updateDate={props.updateDate} /></span>
 
-            <Snackbars deposit = {deposit} withdraw ={withdraw} didUpdate = {props.didUpdate}/>
+            <Snackbars deposit = {deposit} withdraw ={withdraw} didUpdate = {props.didUpdate} resetUpdated = {props.resetUpdated}/>
         </div>
     );
 

@@ -19,6 +19,7 @@ export default function InfoSnackbar(props) {
             return;
         }
 
+        props.resetUpdated()
         setOpen(false);
     };
 

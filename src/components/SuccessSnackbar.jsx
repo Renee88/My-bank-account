@@ -18,7 +18,7 @@ export default function SuccessSnackbar(props) {
         if (reason === 'clickaway') {
             return;
         }
-
+        props.resetUpdated()
         setOpen(false);
     };
 
