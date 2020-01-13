@@ -11,7 +11,7 @@ class SelectMonth extends Component {
             <div id="drop-down-menu">
                     <div id="placeholder" >Select a month <i className="fas fa-caret-down"></i></div>
                     <div className="months">
-                        {months.map(m => <Link to={`/breakdown/${m}`} ><div id ={m} className = "month" >{m}</div></ Link>)}
+                        {months.map((m,i) => <Link key = {i} to={`/breakdown/${m}`} ><div id ={m} className = "month" >{m}</div></ Link>)}
                     </div>
                 </div>
         );
