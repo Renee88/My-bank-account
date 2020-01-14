@@ -1,11 +1,7 @@
 import React from 'react';
 import { Button, Snackbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Slide from '@material-ui/core/Slide';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import SuccessSnackbar from './SuccessSnackbar';
-import MySnackbarContentWrapper from './MySnackbarContentWrapper';
 import { useEffect } from 'react';
 import ErrorSnackbar from './ErrorSnackbar';
 import InfoSnackbar from './InfoSnackbar';
@@ -19,7 +15,6 @@ const useStyles = makeStyles(theme => ({
 
 
 export default function Snackbars(props) {
-  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [updated, didUpdate] = React.useState(false)
 

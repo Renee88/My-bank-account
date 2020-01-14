@@ -74,7 +74,6 @@ class App extends Component {
               this.setState({ transactions, newTransaction, updated })
             } catch (error) {
               if(error.request || error.response){
-                debugger
                 updated = '404'
                 this.setState({ updated })
               }
