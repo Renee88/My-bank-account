@@ -15,14 +15,14 @@ class Transaction extends Component {
         transaction.date = moment(transaction.date).format('L')
         return (
             <div className={transaction.amount >= 0 ? "transaction deposit" : "transaction withdraw"} >
-                <div class="left">
+                <div className="left">
                     <div className="amount">{transaction.amount}$</div>
                 </div>
                 <div className="middle">
                     <div className="vendor data">{transaction.vendor}</div>
                     <div className="category data">{this.firstToUpperCase(transaction.category)}</div>
                 </div>
-                <div class="right">
+                <div className="right">
                     <div className="date data">{transaction.date}</div>
                     <div className="delete data" onClick={this.removeTransaction}><i className="fas fa-trash-alt"></i></div>
                 </div>

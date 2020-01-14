@@ -3,17 +3,31 @@ import moment from 'moment';
 
 class MonthlyBreakdown extends Component {
 
+    constructor(){
+        super()
+        this.state = {
+            year: new Date().getFullYear()
+        }
+    }
+
+
     firstToUpperCase(word) {
         return this.props.firstToUpperCase(word)
     }
 
     render() {
+       
         let month = this.props.match.params.month
+        const year = this.props.match.params.year
         const months = moment.months()
         const monthNum = months.indexOf(month) + 1 < 10 ? "0" + (months.indexOf(month) + 1) : months.indexOf(month) + 1
         let transactions = this.props.transactions
-
-        let monthlyBalance = transactions.filter(t => t.date.slice(0, 2) == monthNum)
+        
+        if(transactions.length){
+            console.log(transactions[0].date.toString().slice(-4)) 
+        }
+        
+        let monthlyBalance = transactions.filter(t => t.date.slice(0, 2) == monthNum && t.date.slice(-4) == year)
         let groupedBalance = {}
         monthlyBalance.forEach(t => groupedBalance[t.category] ? groupedBalance[t.category] += t.amount : groupedBalance[t.category] = t.amount)
         let categories = Object.keys(groupedBalance)

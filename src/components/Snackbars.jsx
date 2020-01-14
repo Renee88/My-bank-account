@@ -24,8 +24,6 @@ export default function Snackbars(props) {
   const [updated, didUpdate] = React.useState(false)
 
   useEffect(() => {
-    console.log(updated)
-    console.log(open)
     didUpdate(props.didUpdate)
   })
 
