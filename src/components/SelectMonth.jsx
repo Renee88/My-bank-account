@@ -1,21 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import moment from 'moment'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { DatePicker } from 'antd'
+import ReactDOM from 'react-dom'
+import { useEffect } from 'react';
 
 
-class SelectMonth extends Component {
+const { MonthPicker, RangePicker, WeekPicker } = DatePicker
 
-    render() {
-        let months = moment.months()
-        return (
-            <div id="drop-down-menu">
-                    <div id="placeholder" >Select a month <i className="fas fa-caret-down"></i></div>
-                    <div className="months">
-                        {months.map((m,i) => <Link key = {i} to={`/breakdown/${m}`} ><div id ={m} className = "month" >{m}</div></ Link>)}
-                    </div>
-                </div>
-        );
+
+function SelectMonth(props) {
+
+    let months = moment.months()
+    
+    async function getYear(date, dateString) {
+        let newYear = dateString.slice(0, 4)
+        let monthIndex = dateString.slice(-2) - 1
+        let shortName = months[monthIndex]
+        window.location.replace(`/breakdown/${shortName}/${newYear}`)
     }
+
+
+    return (
+        <div id="container" style={{ padding: "24px" }}>
+            <MonthPicker placeholder="Select month" onChange={getYear}  />
+        </div>
+
+    );
+
 }
 
 export default SelectMonth;

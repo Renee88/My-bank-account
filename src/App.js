@@ -27,7 +27,8 @@ class App extends Component {
       },
       balance: [],
       updated: false,
-      monthlyBalance: []
+      monthlyBalance: [],
+      year: new Date().getFullYear()
     }
   }
 
@@ -115,7 +116,6 @@ class App extends Component {
   updateNewTransaction = (e) => {
     let value = e.target.value
     let name = e.target.name
-    console.log(value)
     let newTransaction = this.state.newTransaction
     newTransaction[name] = value
     this.setState({ newTransaction })
@@ -153,7 +153,10 @@ class App extends Component {
     this.setState({ balance: groupedTransactions.data })
   }
 
-
+  changeYear = (chosenYear) => {
+    let year = chosenYear
+    this.setState({year})
+  }
 
   updateDate = (date) => {
     const newTransaction = this.state.newTransaction
@@ -181,7 +184,7 @@ class App extends Component {
     return (this.state.transactions ?
       <Router>
         <Route exact path = '/' render ={()=> <Landing />} />
-        <Route path='/' render={() => <Home transactions={this.state.transactions} groupByMonth={this.groupByMonth} breakdown={this.breakdown} />} />
+        <Route path='/' render={() => <Home breakdown={this.breakdown} />} />
         <div id="main-container">
           <div id="sum"><div>Balance</div><div id="num">{this.balance(this.state.transactions)}$</div></div>
 
@@ -189,9 +192,8 @@ class App extends Component {
           <Route exact path='/operations' render={() => <Operations withdraw={this.withdraw} deposit={this.deposit}
             updateNewTransaction={this.updateNewTransaction} updateDate={this.updateDate}
             newTransaction={this.state.newTransaction} didUpdate={this.state.updated} resetUpdated = {this.resetUpdated}/>} />
-          {/* <Route path='/breakdown' render={() => <Breakdown breakdown={this.breakdown} firstToUpperCase={this.firstToUpperCase} transactions={this.state.transactions} balance={this.state.balance} />} /> */}
           <Route path='/breakdown' render={() => <SelectMonth />} />
-          <Route exact path='/breakdown/:month' render={({ match }) => <MonthlyBreakdown firstToUpperCase={this.firstToUpperCase} transactions={this.state.transactions} match={match} />} />
+          <Route exact path='/breakdown/:month/:year' render={({ match }) => <MonthlyBreakdown firstToUpperCase={this.firstToUpperCase} transactions={this.state.transactions} match={match} />} />
         </div>
       </Router>
       : null)

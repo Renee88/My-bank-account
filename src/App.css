@@ -1,3 +1,5 @@
+@import '../node_modules/antd/dist/antd.css';
+
 body{
   margin: 0;
   width: 100vw;
@@ -211,9 +213,7 @@ color: #1B2021;
 
 
 #breakdown{
-  /* margin-top: 15px; */
   display: grid;
-  /* justify-content: center; */
   grid-template-columns: repeat(2, 1fr);
   padding-right: 10px;
   padding-left: 5px;
@@ -235,7 +235,7 @@ color: #1B2021;
 
 
 
-.months{
+/* .months{
   display: none;
   position: absolute;
   width: 45vw;
@@ -246,9 +246,11 @@ color: #1B2021;
   background-color:rgba(247, 247, 242, 0.9);
   border-radius: 0px 0px 5px 5px;
   box-shadow: 0px 2px 3px #1B2021;
+} */
+
+.ant-calendar-month-calendar{
+  left: 12vw;
 }
-
-
 .month{
   font-size: 15px;
   margin: 10px;
@@ -334,6 +336,7 @@ color: #1B2021;
   box-shadow: 1px 1px 5px #1B2021;
   margin: 5px;
   height: 15vh;
+  width: 28vw;
   border-radius: 3px;
   font-family: 'Montserrat', sans-serif;
   font-size: 13px;
