@@ -37,6 +37,6 @@ Follow the next steps to run the app on your machine.
 
 <img src ="/images/Balance.png" height = 400>
 
-- Expenses breakdown page showes the monthly and total breakdown of the user's transactions. The transactions are grouped by category.
+- Expenses breakdown page showes monthly breakdown of the user's transactions. The transactions are grouped by category.
 
 <img src ="/images/Breakdown.png" height = 400>
