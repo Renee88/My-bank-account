@@ -11,13 +11,11 @@ body{
   grid-template-columns: repeat(3,2fr);
   justify-items: center;
   align-items: center;
-  /* background-image: linear-gradient(45deg, #FE8F8F, #FEB880); */
   background-color: #F7F7F2;
   box-shadow: 1px 1px 5px #1B2021;
   width: 90vw;
   height: 80px;
   font-size: 14px;
-  /* border-radius: 5px; */
   padding: 5px;
   margin: 5px;
   font-family: 'Montserrat', sans-serif;
@@ -83,7 +81,6 @@ body{
   flex-direction: column;
   align-items: center;
   min-height: 90vh;
-  /* background-image: linear-gradient(45deg, #C578EB, #E9ADD8); */
 }
 
 #sum{
@@ -234,20 +231,6 @@ color: #1B2021;
 }
 
 
-
-/* .months{
-  display: none;
-  position: absolute;
-  width: 45vw;
-  padding: 5px;
-  text-align: center;
-  z-index: 1;
-  overflow: auto;
-  background-color:rgba(247, 247, 242, 0.9);
-  border-radius: 0px 0px 5px 5px;
-  box-shadow: 0px 2px 3px #1B2021;
-} */
-
 .ant-calendar-month-calendar{
   left: 12vw;
 }
@@ -275,13 +258,6 @@ color: #1B2021;
   flex-direction: column;
   position: inherit;
   justify-content: center;
-  padding-right: 10px;
-  padding-left: 5px; 
-  /* background-image: linear-gradient(-45deg,white,#82DDF0,#DCEDFF,#54C6EB); */
-  /* background-color: #3D348B;
-  border-radius: 5px;
-  text-align: center;
-  box-shadow: 2px 2px 3px #1B2021;*/
 } 
 
 
