@@ -185,7 +185,7 @@ class App extends Component {
         <Route exact path = '/' render ={()=> <Landing />} />
         <Route path ='/' render={() => <Home breakdown={this.breakdown} />} />
         <div id="main-container">
-
+          
           <div id="sum"><div>Balance</div><div id="num">{this.balance(this.state.transactions)}$</div></div>
           
           <Route exact path='/transactions' render={() => <Transactions transData={this.state.transactions} removeTransaction={this.removeTransaction} firstToUpperCase={this.firstToUpperCase} />} />
