@@ -19,8 +19,8 @@ export default function WarningSnackbar(props) {
             return;
         }
 
-        props.resetUpdated()
         setOpen(false);
+        props.resetInput()
     };
 
 
@@ -38,7 +38,7 @@ export default function WarningSnackbar(props) {
             <MySnackbarContentWrapper
                 onClose={handleClose}
                 variant="warning"
-                message="Your reached the allowed limit of withdrawal"
+                message={`Your can withdraw up to ${props.maxWithdrawal}`}
             />
         </Snackbar>
     )

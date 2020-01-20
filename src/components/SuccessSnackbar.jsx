@@ -10,7 +10,6 @@ const useStyles2 = makeStyles(theme => ({
 }));
 
 export default function SuccessSnackbar(props) {
-    const classes = useStyles2();
     const [open, setOpen] = React.useState(props.open);
 
 
@@ -18,9 +17,10 @@ export default function SuccessSnackbar(props) {
         if (reason === 'clickaway') {
             return;
         }
-        props.resetUpdated()
-        setOpen(false);
+        setOpen(false)
+        props.resetInput()
     };
+
 
 
     return (

@@ -231,9 +231,10 @@ color: #1B2021;
 }
 
 
-.ant-calendar-month-calendar{
-  left: 12vw;
+.ant-calendar-picker-container {
+  left: 12vw !important;
 }
+
 .month{
   font-size: 15px;
   margin: 10px;

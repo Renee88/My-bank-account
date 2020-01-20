@@ -22,8 +22,8 @@ function SelectMonth(props) {
 
 
     return (
-        <div id="container" style={{ padding: "24px" }}>
-            <MonthPicker placeholder="Select month" onChange={getYear}  />
+        <div id="antd-datepicker-container" style={{ padding: "24px" }}>
+            <MonthPicker dropdownClassName = "monthpicker" placeholder="Select month" onChange={getYear} />
         </div>
 
     );

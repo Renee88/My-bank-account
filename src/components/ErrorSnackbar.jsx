@@ -19,8 +19,8 @@ export default function ErrorSnackbar(props) {
             return;
         }
         
-        props.resetUpdated()
         setOpen(false);
+        props.resetInput()
     };
 
 
