@@ -12,7 +12,7 @@
     "@material-ui/icons": "^4.5.1",
     "@material-ui/pickers": "^3.2.8",
     "antd": "^3.26.6",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "date-fns": "^2.0.0-beta.5",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
